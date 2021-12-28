@@ -729,8 +729,6 @@ body.light .heading{
 	display:grid;
 	grid-template-columns:repeat(4,1fr);
 	grid-gap:2rem;
-	padding-left:15px;
-	padding-right: 15px;
 	overflow:hidden;
 }
 
@@ -744,7 +742,7 @@ body.light .heading{
 	border-radius:5px;
 	box-shadow:0 0 20px rgba(0,0,0,.1);
 	overflow:hidden;
-	border-radius: 20px;
+	border-radius: 0px;
 }
 .card-single:hover{
 	transform:scale(1.03);
@@ -781,14 +779,14 @@ body.light .heading{
 	margin-top:3.5rem;
 	display:grid;
 	grid-gap:2rem;
-	grid-template-columns:65% auto;
+	grid-template-columns:auto auto;
 	
 }
 .card
 {
 /* 	background:#fff; */
 	background:var(--new-content);
-	border-radius: 20px;
+	border-radius: 0px;
 	
 }
 /* =========COUNTER=========== */
@@ -914,7 +912,7 @@ thead td
 }
 td
 {
-	padding:.5rem 1rem;
+	padding:.5rem 0.5px;
 	font-size:1rem;
 	color:#000;
 }
