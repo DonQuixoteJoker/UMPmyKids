@@ -117,6 +117,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `userType`, `userName`, `userPassword`) VALUES
+('U001', 'admin', 'Lee', 'abc123'),
 ('U002', 'admin', 'Aiman', 'aiman123'),
 ('U003', 'admin', 'Khairul', 'khairul123'),
 ('U004', 'owner', 'Yong', 'yong123'),
