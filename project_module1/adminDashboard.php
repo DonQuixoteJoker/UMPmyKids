@@ -74,7 +74,7 @@
             </div>
             </a>
 
-			<a href="searchUser.php" >
+			<a href="updateUser.php" >
                 <div class="card-single">
 				<div>
 					<span>Update User Profile</span>
