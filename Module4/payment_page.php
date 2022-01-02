@@ -1,28 +1,24 @@
 <?php
-include 'config/dbcon.php';
+include '../config/dbcon.php';
 
 //Payment Pending Count SQL
-$a=mysqli_query($conn,"SELECT COUNT(*) as pending_payment from payment WHERE paymentStatus = 'Pending'");
+$a=mysqli_query($conn,"SELECT (SELECT SUM(paymentAmount) from payment WHERE paymentStatus = 'Received')-(SELECT SUM(paymentAmount) from payment WHERE paymentStatus = 'Overdue') as profit");
 $a_data=mysqli_fetch_assoc($a);
 
 //Salary Pending Count SQL
-$b=mysqli_query($conn,"SELECT COUNT(*) as pending_salary from salary WHERE salaryStatus = 'Pending'");
+$b=mysqli_query($conn,"SELECT COUNT(*) as kids_registered from kid");
 $b_data=mysqli_fetch_assoc($b);
 
 //Total Worker Count SQL
-$c=mysqli_query($conn,"SELECT COUNT(*) as total_worker from manpower");
+$c=mysqli_query($conn,"SELECT SUM(paymentAmount) as total_paid from payment WHERE paymentStatus = 'Received'");
 $c_data=mysqli_fetch_assoc($c);
 
 //Total Kids Count SQL
-$d=mysqli_query($conn,"SELECT COUNT(*) as total_kids from kid");
+$d=mysqli_query($conn,"SELECT SUM(paymentAmount) as total_overdue from payment WHERE paymentStatus = 'Overdue'");
 $d_data=mysqli_fetch_assoc($d);
 
 //Select all data from payment table
-$payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID WHERE paymentStatus = 'Pending'");
-
-
-//Select all data from salary table
-$salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpower ON salary.mpID=manpower.mpID WHERE salaryStatus = 'Pending'");
+$payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID");
 
 ?>
 
@@ -31,7 +27,7 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
 
 <head>
     <meta charset="UTF-8">
-    <title>Owner Dashboard</title>
+    <title>Payment</title>
     <link rel="stylesheet"
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <meta name="viewport" content="width=device-width initial-scale =1">
@@ -41,7 +37,7 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../css/index.css">
 
 </head>
 
@@ -51,18 +47,18 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
 
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><img src="img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse"
+            <h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse"
                     style="vertical-align: baseline; position:fixed; overflow: hidden;">UMP myKids</span></h2>
         </div>
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="owner_dashboard.php" class="active" style="text-decoration:none"><span class="las la-igloo"></span>
+                    <a href="../owner_dashboard.php" class="active" style="text-decoration:none"><span class="las la-igloo"></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="Module4/payment_page.php" style="text-decoration:none"><span class="las la-users"></span>
+                    <a href="payment_page.php" style="text-decoration:none"><span class="las la-users"></span>
                         <span>Payment</span>
                     </a>
                 </li>
@@ -98,9 +94,9 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                 <div class="card-single">
                     <div>
                         <h1 class="dataNo">
-                            <?php echo $a_data['pending_payment']; ?>
+                            RM <?php echo $a_data['profit']; ?>
                         </h1>
-                        <span>Payment Pending</span>
+                        <span>Profit</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>
@@ -109,9 +105,9 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                 <div class="card-single">
                     <div>
                         <h1 class="dataNo">
-                            <?php echo $b_data['pending_salary']; ?>
+                            <?php echo $b_data['kids_registered']; ?>
                         </h1>
-                        <span>Salary Pending</span>
+                        <span>Kids Registered</span>
                     </div>
                     <div>
                         <span class="las la-hand-holding-usd"></span>
@@ -120,9 +116,9 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                 <div class="card-single">
                     <div>
                         <h1 class="dataNo">
-                            <?php echo $c_data['total_worker']; ?>
+                            RM <?php echo $c_data['total_paid']; ?>
                         </h1>
-                        <span>Total Worker</span>
+                        <span>Total Paid</span>
                     </div>
                     <div>
                         <span class="las la-chalkboard-teacher"></span>
@@ -131,9 +127,9 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                 <div class="card-single">
                     <div>
                         <h1 class="dataNo">
-                            <?php echo $d_data['total_kids']; ?>
+                            RM <?php echo $d_data['total_overdue']; ?>
                         </h1>
-                        <span>Total Kids</span>
+                        <span>Total Overdue</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
@@ -144,23 +140,24 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
             <div class="recent-grid">
                 <div class="projects">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="heading">Payment Pending</h3>
-                            <button onclick="window.location.href='Module4/payment_page.php'">See all<span class="las la-arrow-right"></span></button>
-                        </div>
+                       
                         <div class="card-body">
                             <div class="table-responsive">
 
                                 <table width="100%">
-                                <col style="width: 20%;" />
-                                <col style="width: 40%;" />
-                                <col style="width: 20%;" />
-                                <col style="width: 20%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
                                     <thead>
                                         <tr>
                                             <td>Parent ID</td>
                                             <td>Parent Name</td>
                                             <td>Amount</td>
+                                            <td>Status</td>
+                                            <td>Payment Date</td>
                                             <td style="text-align:center;">Action</td>
                                         </tr>
                                     </thead>
@@ -168,16 +165,16 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                                     ?>
                                     <tbody>
                                         <tr>
+                                            <td><?php echo $row["parID"]; ?></td>
+                                            <td><?php echo $row["parName"]; ?></td>
+                                            <td style="display:none"><?php echo $row["parPhoneNum"]; ?></td>
+                                            <td>RM<?php echo $row["paymentAmount"]; ?></td>
+                                            <td><?php echo $row["paymentStatus"]; ?></td>
+                                            <td><?php echo $row["paymentDate"]; ?></td>
                                             <td>
-                                                <?php echo $row["parID"]; ?>
+                                                <button class="myButton viewDetail">View</button>
+                                                <button class="myButton">Remind</button>
                                             </td>
-                                            <td>
-                                                <?php echo $row["parName"]; ?>
-                                            </td>
-                                            <td>RM
-                                                <?php echo $row["paymentAmount"]; ?>
-                                            </td>
-                                            <td><button class="myButton editbtn">View</button></td>
                             
                             </td>
                             </tr>
@@ -193,48 +190,8 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                 </div>
             </div>
 
-            <div class="projects">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="heading">Salary Pending</h3>
-                        <button>See all <span class="las la-arrow-right"></span></button>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table width="100%">
-                                <col style="width: 20%;" />
-                                <col style="width: 40%;" />
-                                <col style="width: 20%;" />
-                                <col style="width: 20%;" />
-                                <thead>
-                                
-                                    <tr>
-                                        <td>Manpower ID</td>
-                                        <td>Manpower Name</td>
-                                        <td>Amount</td>
-                                        <td style="text-align:center">Action</td>
-                                    </tr>
-                                </thead>
-                                <?php while ($row = mysqli_fetch_array($salary)) {
-                                    ?>
-                                <tbody>
-                                    <tr>
-                                        <td><?php echo $row["mpID"]; ?></td>
-                                        <td><?php echo $row["mpName"]; ?></td>
-                                        <td>RM <?php echo $row["totalSalary"]; ?></td>
-                                        <td><button class="myButton editbtn">View</button></td>
-                                    </tr>
-                                </tbody>
-                                <?php
-                                        }
-                                    ?>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
- <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
- <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ <!-- VIEW MODAL -->
+ <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -249,35 +206,41 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
 
                     <div class="modal-body">
 
-                        <input type="hidden" name="update_id" id="update_id">
-
                         <div class="form-group">
-                            <label> First Name </label>
-                            <input type="text" name="fname" id="fname" class="form-control" disabled>
+                            <label><strong>Parent ID</strong></label>
+                            <input type="text" name="parent_id" id="parent_id" class="form-control" disabled>
                         </div>
 
                         <div class="form-group">
-                            <label> Last Name </label>
-                            <input type="text" name="lname" id="lname" class="form-control" disabled>
+                            <label><strong>Name</strong></label>
+                            <input type="text" name="name" id="name" class="form-control" disabled>
                         </div>
 
                         <div class="form-group">
-                            <label> Course </label>
-                            <input type="text" name="course" id="course" class="form-control"
-                                placeholder="Enter Course">
+                            <label><strong>Phone Number</strong></label>
+                            <input type="text" name="phoneNo" id="phoneNo" class="form-control" disabled>
                         </div>
 
                         <div class="form-group">
-                            <label> Phone Number </label>
-                            <input type="text" name="contact" id="contact" class="form-control"
-                                placeholder="Enter Phone Number">
+                            <label><strong>Address</strong></label>
+                            <input type="text" name="address" id="address" class="form-control" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label><strong>Year Registered</strong></label>
+                            <input type="text" name="yearReg" id="yearReg" class="form-control" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label><strong>Status</strong></label>
+                            <input type="text" name="status" id="status" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                    
                     </div>
-                </form>
+
+                    </form>
 
             </div>
         </div>
@@ -300,11 +263,25 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('.editbtn').on('click',function(){
-                $('#editmodal').modal('show');
-            });
-        });
+        $(document).ready(function () {
+
+$('.viewDetail').on('click', function () {
+
+    $('#viewModal').modal('show');
+
+    $tr = $(this).closest('tr');
+
+    var data = $tr.children("td").map(function () {
+        return $(this).text();
+    }).get();
+
+    $('#parent_id').val(data[0]);
+    $('#name').val(data[1]);
+    $('#phoneNo').val(data[2]);
+    $('#address').val(data[3]);
+    $('#yearReg').val(data[4]);
+});
+});
     </script>
 
 </body>
