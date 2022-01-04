@@ -168,7 +168,10 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                                             <td><?php echo $row["parID"]; ?></td>
                                             <td><?php echo $row["parName"]; ?></td>
                                             <td style="display:none"><?php echo $row["parPhoneNum"]; ?></td>
-                                            <td>RM<?php echo $row["paymentAmount"]; ?></td>
+                                            <td style="display:none"><?php echo $row["parAddress"]; ?></td>
+                                            <td style="display:none"><?php echo $row["parYearReg"]; ?></td>
+                                            <td style="display:none"><?php echo $row["parStatus"]; ?></td>
+                                            <td>RM <?php echo $row["paymentAmount"]; ?></td>
                                             <td><?php echo $row["paymentStatus"]; ?></td>
                                             <td><?php echo $row["paymentDate"]; ?></td>
                                             <td>
@@ -280,6 +283,7 @@ $('.viewDetail').on('click', function () {
     $('#phoneNo').val(data[2]);
     $('#address').val(data[3]);
     $('#yearReg').val(data[4]);
+    $('#status').val(data[5]);
 });
 });
     </script>

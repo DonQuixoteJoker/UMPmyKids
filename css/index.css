@@ -907,8 +907,8 @@ table
 }
 thead tr
 {
-	border-top:1px solid var(--icon-color);
-	border-bottom:1px solid var(--icon-color);
+	border-top:2px solid white;
+	border-bottom:2px solid white;
 }
 thead td
 {
