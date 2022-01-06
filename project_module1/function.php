@@ -4,6 +4,11 @@ session_start();
 	$errors = array();
 	
 	require_once("Connection.php");
+
+        $userID = null;
+	$userName = null;
+	$userPassword = null;
+	$userType = null;
 	
 	if (isset($_POST['login'])) {
 		$userID = mysqli_real_escape_string($con, $_POST['userID']);
