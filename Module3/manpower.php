@@ -14,8 +14,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet" href="css/index.css">
-<link rel="stylesheet" href="css/manpower.css">
+<link rel="stylesheet" href="../css/index.css">
+<link rel="stylesheet" href="../css/manpower.css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 
 <div class="sidebar">
  	<div class="sidebar-brand">
- 		 	<h2><img src="img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
+ 		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
 	 	<ul>
@@ -85,7 +85,7 @@
 			</div>
             <div class="card-single">
 				<div>
-                    <a href="#">
+                    <a href="manpower_view.php">
 					<h1 id="manpower_update"></h1>
 					<span>Update Manpower</span>
                     </a>

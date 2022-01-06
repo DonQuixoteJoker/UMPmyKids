@@ -781,7 +781,7 @@ body.light .heading{
 	margin-top:3.5rem;
 	display:grid;
 	grid-gap:2rem;
-	grid-template-columns:65% auto;
+	grid-template-columns:50% auto;
 	
 }
 .card
@@ -1067,7 +1067,7 @@ tr td:last-child
 	}
 	.recent-grid
 	{
-		grid-template-columns:60% 40%;
+		grid-template-columns:80% 20%;
 	}
 }
 @media only screen and (max-width:768px){
