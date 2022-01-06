@@ -39,7 +39,7 @@
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="manpower.html"><span class="la la-user-circle"></span>
+	 			<a href="manpower.php"><span class="la la-user-circle"></span>
 	 				<span>Manpower</span>
 	 			</a>
 	 		</li>
@@ -74,7 +74,7 @@
 		<div class="cards">
 			<div class="card-single">
 				<div>
-                    <a href="manpower_register.html">
+                    <a href="manpower_register.php">
 					<h1 id="manpower_register"></h1>
 					<span>Register Manpower</span>
                     </a>
