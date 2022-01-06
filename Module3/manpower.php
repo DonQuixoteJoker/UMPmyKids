@@ -87,40 +87,7 @@
 				<div>
                     <a href="manpower_view.php">
 					<h1 id="manpower_update"></h1>
-					<span>Update Manpower</span>
-                    </a>
-				</div>
-				<div>
-					<span class="las la-users"></span>
-				</div> 
-			</div>
-            <div class="card-single">
-				<div>
-                    <a href="#">
-					<h1 id="manpower_delete"></h1>
-					<span>Delete Manpower</span>
-                    </a>
-				</div>
-				<div>
-					<span class="las la-users"></span>
-				</div> 
-			</div>
-            <div class="card-single">
-				<div>
-                    <a href="#">
-					<h1 id="manpower_view"></h1>
 					<span>View Manpower</span>
-                    </a>
-				</div>
-				<div>
-					<span class="las la-users"></span>
-				</div> 
-			</div>
-            <div class="card-single">
-				<div>
-                    <a href="#">
-					<h1 id="manpower_task"></h1>
-					<span>Manpower Task</span>
                     </a>
 				</div>
 				<div>
@@ -153,19 +120,38 @@
 									<td>User</td>
 									<td>Total</td>
 								</tr>
+								<?php 
+									//database connection
+									$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
+
+									// to select the targeted database
+									mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+
+									//total admin
+									$resultTeacher = mysqli_query($con, "SELECT COUNT(*) AS totalTeacher FROM manpower WHERE mpOccupation='Teacher'");
+									$num_rowsTeacher = mysqli_fetch_assoc($resultTeacher);
+
+									//total staff
+									$resultCaretaker = mysqli_query($con, "SELECT COUNT(*) AS totalCaretaker FROM manpower WHERE mpOccupation='Caretaker'");
+									$num_rowsCaretaker = mysqli_fetch_assoc($resultCaretaker);
+
+									//total owner
+									$resultStaff = mysqli_query($con, "SELECT COUNT(*) AS totalStaff FROM manpower WHERE mpOccupation='Staff'");
+									$num_rowsStaff = mysqli_fetch_assoc($resultStaff);
+								?>
 							</thead>
 							<tbody>
                                 <tr>
-									<td>Admin</td>
-									<td>5</td>
+									<td>Teacher</td>
+									<td><?php echo $num_rowsTeacher['totalTeacher']; ?></td>
 								</tr>
 								<tr>
-									<td>UMP Staff</td>
-									<td>10</td>
+									<td>Caretaker</td>
+									<td><?php echo $num_rowsCaretaker['totalCaretaker']; ?></td>
 								</tr>
 								<tr>
-									<td>Owner</td>
-									<td>1</td>
+									<td>Staff</td>
+									<td><?php echo $num_rowsStaff['totalStaff']; ?></td>
 								</tr>
 							</tbody>
 						</table>
