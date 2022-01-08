@@ -1,3 +1,7 @@
+<?php
+    include 'connect.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +35,15 @@ input[type=text], input[type=password], select
 	box-sizing: border-box;
     color:black;
     font-size: 15px;
+    background-color: #F5F5F5;
+}
 
+::placeholder {
+  color: #A9A9A9;
 }
 
 .button {
-    background-color: #C3C3C3;
+    background-color: #808080;
     border: none;
     color: white;
     padding: 10px 10px;
@@ -64,7 +72,7 @@ form
 {
 	margin: auto;
 	width: 100%;
-	padding: 10px;
+	padding: 10px;    
 }
 
 </style>
@@ -129,12 +137,12 @@ form
                 <table>
                     
                     
-                    <tr style="background-color: white">
+                    <tr style="background-color: #D3D3D3">
                         <!--<td>
                             <th style="text-align: left;">Enter MP ID:</th>
                         </td>-->
                         <td colspan="2">
-                            <input type="text" placeholder="Enter MP ID" name="searchID" id="searchID">
+                            <input type="text" placeholder="Search Worker ID" name="searchID" id="searchID">
                         </td>
                         <td>
                             <button name="viewUser" value="SEARCH" class="button">SEARCH</button>
@@ -155,20 +163,20 @@ form
                             <div class="table-responsive">
 
                                 <table width="100%">
+                                <col style="width: 20%;" />
+                                <col style="width: 20%;" />
+                                <col style="width: 20%;" />
+                                <col style="width: 20%;" />
                                 <col style="width: 10%;" />
-                                <col style="width: 10%;" />
-                                <col style="width: 10%;" />
-                                <col style="width: 10%;" />
-                                <col style="width: 10%;" />
-                                <col style="width: 10%;" />
+                                <!--<col style="width: 10%;" />-->
                                     <thead>
                                         <tr>
-                                            <td>Parent ID</td>
-                                            <td>Parent Name</td>
+                                            <td>Manpower ID</td>
                                             <td>Amount</td>
+                                            <td>Date</td>
                                             <td>Status</td>
-                                            <td>Payment Date</td>
-                                            <td style="text-align:center;">Action</td>
+                                            <td>Reminder</td>
+                                            <!--<td style="text-align:center;">Action</td>-->
                                         </tr>
                                     </thead>
 
