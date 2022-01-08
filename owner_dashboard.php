@@ -67,7 +67,7 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                     </a>
                 </li>
                 <li>
-                    <a href="#" style="text-decoration:none"><span class="las la-shopping-bag"></span>
+                    <a href="Module_5/salaryMain.php" style="text-decoration:none"><span class="las la-shopping-bag"></span>
                         <span>Salary</span>
                     </a>
                 </li>

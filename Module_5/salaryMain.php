@@ -14,6 +14,60 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="../css/index.css">
+
+<style>
+table{
+	padding: 20px;
+	width: 100%;
+}
+
+input[type=text], input[type=password], select 
+{
+	width: 90%;
+	padding: 15px 50px;
+	margin: 8px 0;
+	display: inline-block;
+	box-sizing: border-box;
+    color:black;
+    font-size: 15px;
+
+}
+
+.button {
+    background-color: #C3C3C3;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 15px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+form
+{
+    background-color: #E5E5E5;
+    text-align: center;
+    border-radius: 9px;
+    padding: 10px;
+    font-size: 20px;
+    margin-left:15%;
+    margin-right:20%;
+    align-items: center;
+}
+
+.cent
+{
+	margin: auto;
+	width: 100%;
+	padding: 10px;
+}
+
+</style>
 
 </head>
 <body>
@@ -27,7 +81,7 @@
 	 <div class="sidebar-menu">
 	 	<ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../owner_dashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
@@ -69,52 +123,63 @@
 	</header>
 	<main>
 
-		<!--<div class="cards">
-            <a href="createUser.php" >
-            <div class="card-single">
-				<div>
-					<span>Create New User</span>
-				</div>
-				<div>
-					<span class="las la-users"></span>
-				</div>
+
+		<div>
+			<form action="salaryMain.php" method="post">
+                <table>
+                    
+                    
+                    <tr style="background-color: white">
+                        <!--<td>
+                            <th style="text-align: left;">Enter MP ID:</th>
+                        </td>-->
+                        <td colspan="2">
+                            <input type="text" placeholder="Enter MP ID" name="searchID" id="searchID">
+                        </td>
+                        <td>
+                            <button name="viewUser" value="SEARCH" class="button">SEARCH</button>
+                        </td>                    
+                    </tr>            
+                
+                </table>
+                								                
+			</form>
+		</div>
+
+		<div class="cent">
+			<div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                       
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table width="100%">
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 10%;" />
+                                    <thead>
+                                        <tr>
+                                            <td>Parent ID</td>
+                                            <td>Parent Name</td>
+                                            <td>Amount</td>
+                                            <td>Status</td>
+                                            <td>Payment Date</td>
+                                            <td style="text-align:center;">Action</td>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            </a>
-
-			<a href="updateUser.php" >
-                <div class="card-single">
-				<div>
-					<span>Update User Profile</span>
-					</div>
-				<div>
-					<span class="las la-clipboard"></span>
-				</div>
-			</div>
-            </a>
-
-            <a href="deleteUser.php" >
-			<div class="card-single">
-				<div>
-					<span>Delete User Profile</span>
-					</div>
-				<div>
-					<span class="las la-shopping-bag"></span>
-				</div>
-			</div>
-            </a>
-
-            <a href="viewUser.php" >
-			<div class="card-single">
-				<div>
-					<span>View User Profile</span>
-					</div>
-				<div>
-					<span class="lab la-google-wallet"></span>
-				</div>
-			</div>
-            </a>
-		</div>-->
-
+		</div>
 
 	</main>
     
@@ -123,8 +188,6 @@
 
 </footer>
 </div>
-<!-- partial -->
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
 
 </body>
 </html>
