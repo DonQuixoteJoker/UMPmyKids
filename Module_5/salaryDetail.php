@@ -46,12 +46,12 @@ input[type=text], input[type=password], select
     background-color: #808080;
     border: none;
     color: white;
-    padding: 10px 10px;
+    padding: 10px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 15px;
-    margin: 15px 20px;
+    margin: 15px 30px;
     cursor: pointer;
     border-radius: 4px;
 }
@@ -86,6 +86,29 @@ a{
 a:hover{
     color: #6495ED;
 }
+
+.bigbox
+{
+    text-align: center;
+    width: 100%;
+    background-color: #E5E5E5;
+}
+
+.head{
+    font-family: Bahnschrift;
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 25px;
+    width: 30%;
+    float: left;
+}
+
+.float-child2 {
+    width: 30%;
+    float: right;
+}  
 
 </style>
 
@@ -143,88 +166,79 @@ a:hover{
 	</header>
 	<main>
 
-
-		<div>
-			<form action="salaryMain.php" method="post">
-                <table>
+        <div class="bigbox">
+            <div class="head">
+                <!--<form action="salaryMain.php" method="post">
+                    <table>
+                        
+                        
+                        <tr style="background-color: #D3D3D3">
+                            <td>
+                                <th style="text-align: left;">Enter MP ID:</th>
+                            </td>
+                            <td colspan="2">
+                                <input type="text" placeholder="Search Worker ID" name="searchID" id="searchID">
+                            </td>
+                            <td>
+                                <button name="viewWorker" value="SEARCH" class="button">SEARCH</button>
+                            </td>                    
+                        </tr>            
                     
-                    
-                    <tr style="background-color: #D3D3D3">
-                        <!--<td>
-                            <th style="text-align: left;">Enter MP ID:</th>
-                        </td>-->
-                        <td colspan="2">
-                            <input type="text" placeholder="Search Worker ID" name="searchID" id="searchID">
-                        </td>
-                        <td>
-                            <button name="viewWorker" value="SEARCH" class="button">SEARCH</button>
-                        </td>                    
-                    </tr>            
-                
-                </table>
-                								                
-			</form>
-		</div>
+                    </table>
+                                                                    
+                </form>-->
+                SALARY DETAILS                            
+            </div>
+            <div class="float-child2">
+                    <button onclick="window.location.href='../Module_5/salaryMain.php'" name="backbutton" value="BACK" class="button">BACK</button>
+            </div>
 
-		<div class="cent">
-			<div class="recent-grid">
-                <div class="projects">
-                    <div class="card">
-                       
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                
-                                <form action="" method="POST" class="cent">
+            <div class="cent">
+                <div class="recent-grid">
+                    <div class="projects">
+                        <div class="card">
+                        
+                            <div class="card-body">
+                                <div class="table-responsive">                                
 
-                                <table width="100%">
-                                <col style="width: 20%;" />
-                                <col style="width: 20%;" />
-                                <col style="width: 20%;" />
-                                <col style="width: 20%;" />
-                                <col style="width: 10%;" />
-                                <!--<col style="width: 10%;" />-->
-                                    <thead>
+                                    <table width="100%">
+                                    <col style="width: 50%;" />
+                                    <col style="width: 50%;" />
                                         <tr>
-                                            <td>Manpower ID</td>
-                                            <td>Amount</td>
-                                            <td>Date</td>
-                                            <td>Status</td>
-                                            <td>Reminder</td>
-                                            <!--<td style="text-align:center;">Action</td>-->
+                                            <td>Worker name: </td>
+                                            <td>Nicole</td>
                                         </tr>
-                                    </thead>
-                                    
-                                    <?php
-                                    //fetch data from database
-                                    $records = mysqli_query($db,"SELECT * FROM salary");
+                                        <tr>
+                                            <td>Manpower ID: </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Base salary: </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Overtime hour(s): </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Overtime payment: </td>
+                                            <td>RM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total salary: </td>
+                                            <td>RM</td>
+                                        </tr>
+                                    </table>
 
-                                    while($data = mysqli_fetch_array($records))
-                                    {   ?>
-                                    <tr>
-                                        <td><a href="salaryDetail.php"><?php echo $data['mpID']; ?></a></td>
-                                        <td>RM <?php echo $data['totalSalary']; ?></td>
-                                        <td><?php echo $data['paidDate']; ?></td>
-                                        <td><?php echo $data['salaryStatus']; ?></td>
-                                        <?php
-                                            
-                                        ?>
-                                        <td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                    ?>
-
-                                </table>
-
-                                </form>
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-		</div>
+        </div>
+
 
 	</main>
     

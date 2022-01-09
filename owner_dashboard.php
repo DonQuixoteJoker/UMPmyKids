@@ -197,7 +197,7 @@ $salary=mysqli_query($conn,"SELECT *,manpower.mpID from salary INNER JOIN manpow
                 <div class="card">
                     <div class="card-header">
                         <h3 class="heading">Salary Pending</h3>
-                        <button>See all <span class="las la-arrow-right"></span></button>
+                        <button onclick="window.location.href='Module_5/salaryMain.php'">See all <span class="las la-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
