@@ -36,14 +36,16 @@ if(isset($_POST["submitCreate"])){
 
         $lastIDString = $lastID_arr[2].$lastID_arr[3].$lastID_arr[4];
 
+        $lastIDString++;
+
         if((int)$lastIDString>99){
-            $mpID = "MP".(int)$lastIDString + 1;
+            $mpID = "MP".(int)$lastIDString;
         }
-        if((int)$lastIDString>9){
-            $mpID = "MP0".(int)$lastIDString + 1;
+        elseif((int)$lastIDString>9){
+            $mpID = "MP0".(int)$lastIDString;
         }
         else{
-            $mpID = "MP00".(int)$lastIDString + 1;
+            $mpID = "MP00".(int)$lastIDString;
         }
 
         //$mpID = "MP00".(int)$lastIDString + 1;
