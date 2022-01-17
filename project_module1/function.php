@@ -1,14 +1,17 @@
 <?php
+// CD19046 LEE ZI XUAN
 session_start();
 
 	$errors = array();
 	
 	require_once("Connection.php");
 
-        $userID = null;
+	$userID = null;
 	$userName = null;
 	$userPassword = null;
 	$userType = null;
+                          
+                    
 	
 	if (isset($_POST['login'])) {
 		$userID = mysqli_real_escape_string($con, $_POST['userID']);
@@ -95,6 +98,23 @@ session_start();
 
 	}
 
+	if (isset($_POST['updateUser_userList'])) 
+	{
+		$userID = mysqli_real_escape_string($con, $_POST['userID']);
+		$userName = mysqli_real_escape_string($con, $_POST['userName']);
+		$userPassword = mysqli_real_escape_string($con, $_POST['userPassword']);
+		$userType = mysqli_real_escape_string($con, $_POST['userType']);
+		
+		$query = "UPDATE user SET userName = '$userName', userPassword = '$userPassword', userType = '$userType' WHERE userID = '$userID'";
+	    $result = mysqli_query($con, $query);
+
+		if($result){
+			header('location: userList.php');
+		}
+
+
+	}
+
 
 	if (isset($_POST['deleteUser'])) 
 	{
@@ -104,6 +124,19 @@ session_start();
 
         if(isset($result)) {
 			header('location: adminDashboard.php');
+		}
+		
+
+	}
+
+	if (isset($_POST['deleteUser_userList'])) 
+	{
+		$userID = $_POST['userID'];
+        $query = "DELETE FROM user WHERE userID ='$userID'";
+        $result = mysqli_query($con, $query);
+
+        if(isset($result)) {
+			header('location: userList.php');
 		}
 		
 
@@ -129,14 +162,10 @@ session_start();
         {
 			array_push($errors, "The User ID dosn't exist!");
 		}
-
-
-		
-
-
 		
 
 	}
+
 
 
 

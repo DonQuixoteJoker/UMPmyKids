@@ -1,3 +1,4 @@
+<!--// CD19046 LEE ZI XUAN-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,8 +138,8 @@ form
     border-radius: 9px;
     padding: 50px;
     font-size: 20px;
-	margin-left:25%;
-    margin-right:25%;
+	margin-left:30%;
+    margin-right:30%;
     align-items: center;
 }
 

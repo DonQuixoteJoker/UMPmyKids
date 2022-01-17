@@ -67,6 +67,7 @@ table
 {
     padding: 20px;
     width: 100%;
+    
 }
 
 th
@@ -108,7 +109,7 @@ th
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Delete User Profile
+			Edit User Profile
 		</h2>
 		
 		<div class="user-wrapper">
@@ -124,68 +125,109 @@ th
 	</header>
 	<main>
         <div>
-            <form action="deleteUser.php" method="post">
-                <table>
 
-                    <tr style="background-color: white">
+            <form action="updateUser.php" method="post">
+
+                <?php 
+                
+                $userID = $_GET['editID']; 
+                $query = "SELECT * FROM user WHERE userID = '$userID'";
+
+                $result = mysqli_query($con,$query);
+                $row = mysqli_fetch_assoc($result);
+                $userID = $row['userID'];
+                $userName = $row['userName'];
+                $userPassword = $row['userPassword'];
+                $userType = $row['userType'];
+                
+                ?>
+                    
+                 
+
+            <table>
+
+            <tr style="background-color: #B0B8FC">
+                <td>
+                    <th colspan="2">User Profile:</th>
+                </td>
+            </tr>
+            <tr style="background-color: #B0B8FC">
+                <td>
+                    <td style="text-align: left;">User ID:</td>
+                </td>
+                <td>
+                    <?php echo $userID; ?>
+                </td>                   
+            </tr>
+            <tr style="background-color: #B0B8FC">
+                <td>
+                    <td style="text-align: left;">Name:</td>
+                </td>
+                <td>
+                    <?php echo $userName;  ?>
+                </td>                   
+            </tr>
+            <tr style="background-color: #B0B8FC">
+                <td>
+                    <td style="text-align: left;">User Type:</td>
+                </td>
+                <td>
+                    <?php echo $userType;  ?>
+                </td>                   
+            </tr>
+            <tr style="background-color: #B0B8FC">
+                <td>
+                    <td style="text-align: left;">Password:</td>
+                </td>
+                <td>
+                    <?php echo $userPassword;  ?>
+                </td>                   
+            </tr>
+
+            <tr><td></td></tr>
+
+            
+                    <tr>
                         <td>
-                            <th style="text-align: left;">Enter User ID:</th>
+                            <th colspan="2">Edit User Profile:</th>
                         </td>
-                        <td colspan="2">
-                            <input type="text" placeholder="Enter User ID" name="searchID" id="searchID">
-                        </td>
-                        <td>
-                            <button name="viewUser" value="SEARCH" class="button">SEARCH</button>
-                        </td>                    
                     </tr>
-
-                    <tr><td></td></tr>
-                </table>
-                    <table>
-
-
-                    <tr style="background-color: #B0B8FC">
-                        <td>
-                            <th>Search Result:</th>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr style="background-color: #B0B8FC">
+                    <tr>
                         <td>
                             <th style="text-align: left;">User ID:</th>
                         </td>
                         <td>
                             <input type="text" placeholder="Enter User ID" name="userID" id="userID" value="<?php echo $userID; ?>" readonly required>
-                        </td>
-                        <td></td>                   
+                        </td>                   
                     </tr>
-                    <tr style="background-color: #B0B8FC">
+                    <tr>
                         <td>
                             <th>Name:</th>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Username" name="userName" id="userName" value="<?php echo $userName; ?>" readonly required>
-                        </td><td></td>
+                            <input type="text" placeholder="Enter Username" name="userName" id="userName">
+                        </td>
                     </tr>
-                    <tr style="background-color: #B0B8FC">
+                    <tr>
                         <td>
                             <th>User Type:</th>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter UserType" name="userType" id="userType" value="<?php echo $userType; ?>" readonly required>
+                            <select id="userType" name="userType">
+                                <option value="admin">Admin</option>
+			                    <option value="owner">Owner</option>
+			                    <option value="UMP Staff">UMP Staff</option>
+		                    </select>
                         </td>
-                        <td></td>
                     </tr>
                     
-                    <tr style="background-color: #B0B8FC">
+                    <tr>
                         <td>
                             <th>Password:</th>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Password" name="userPassword" id="userPassword" value="<?php echo $userPassword; ?>" readonly required>
+                            <input type="password" placeholder="Enter Password" name="userPassword" id="userPassword">
                         </td>
-                        <td></td>
                     </tr>
 
 
@@ -194,7 +236,8 @@ th
 					
 				<?php include ('error.php'); ?>
                 <br>
-                <button name="deleteUser" value="DELETE" class="button" onclick="return confirm('Confirm Delete?');">DELETE</button>
+                <button name="updateUser_userList" value="SUBMIT" class="button">SUBMIT</button>
+                <input type="button" class="button" value="RESET" onclick="reset()">
 			</form>
         </div>
 

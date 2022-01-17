@@ -125,22 +125,23 @@ th
 	<main>
         <div>
             <form action="deleteUser.php" method="post">
-                <table>
 
-                    <tr style="background-color: white">
-                        <td>
-                            <th style="text-align: left;">Enter User ID:</th>
-                        </td>
-                        <td colspan="2">
-                            <input type="text" placeholder="Enter User ID" name="searchID" id="searchID">
-                        </td>
-                        <td>
-                            <button name="viewUser" value="SEARCH" class="button">SEARCH</button>
-                        </td>                    
-                    </tr>
+            <?php 
+                
+                $userID = $_GET['delID']; 
+                $query = "SELECT * FROM user WHERE userID = '$userID'";
 
-                    <tr><td></td></tr>
-                </table>
+                $result = mysqli_query($con,$query);
+                $row = mysqli_fetch_assoc($result);
+                $userID = $row['userID'];
+                $userName = $row['userName'];
+                $userPassword = $row['userPassword'];
+                $userType = $row['userType'];
+                
+            ?>
+                    
+                 
+        
                     <table>
 
 
@@ -194,7 +195,7 @@ th
 					
 				<?php include ('error.php'); ?>
                 <br>
-                <button name="deleteUser" value="DELETE" class="button" onclick="return confirm('Confirm Delete?');">DELETE</button>
+                <button name="deleteUser_userList" value="DELETE" class="button" onclick="return confirm('Confirm Delete?');">DELETE</button>
 			</form>
         </div>
 

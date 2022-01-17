@@ -1,8 +1,9 @@
+<!--// CD19046 LEE ZI XUAN-->
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
+  <title>UMP-myKids</title>
   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 <meta name="viewport" content="width=device-width initial-scale =1">
     <meta name="description" content="how to create a toggle for light and dark mode using html,css and javascript">
@@ -16,6 +17,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="css/index.css">
 
 </head>
+
+<?php
+	include('function.php');
+	error_reporting(E_ALL & ~E_NOTICE);
+	
+    $query = "SELECT *, count(userType) as number FROM user GROUP BY userType"; 
+	$result = mysqli_query($con, $query);
+?>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>  
+<script>
+    google.charts.load('current', {'packages':['corechart']});  
+        google.charts.setOnLoadCallback(drawChart);  
+		function drawChart() {  
+            var data = google.visualization.arrayToDataTable([['type', 'number'],  
+            <?php  
+                while($row = mysqli_fetch_array($result)) {  
+                    echo "['".$row["userType"]."', ".$row["number"]."],";  
+                }  
+            ?>  
+            ]);  
+            var option = {   
+				title: 'THE TOTAL NUMBER OF USER BASED ON USER TYPE',
+				is3D:true,
+            };  
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+            chart.draw(data, option);  
+		}
+
+</script>
+
 <body>
 <!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
@@ -50,13 +82,13 @@
 		</h2>
 		
 		<div class="user-wrapper">
-			<img src="https://pbs.twimg.com/media/EItl_WGU0AAEf3i.jpg" alt="" height="40" width="40">
+			<img src="https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="" height="40" width="40">
 			<div>
-				<h4>MUHD AFIF</h4>
+				<h4>USER TYPE</h4>
 				<small>Admin</small>
 			</div>
-            <div>
-                <a style="color: black;" href="function.php?logout='1'"><b>Log Out</b></a>
+            <div style="margin-left: 20px;">
+                <h3><a style="color: black;" href="function.php?logout='1'">Log Out</a></h3>
             </div>
         </div>
 	</header>
@@ -80,7 +112,7 @@
 					<span>Update User Profile</span>
 					</div>
 				<div>
-					<span class="las la-clipboard"></span>
+					<span class="las la-users"></span>
 				</div>
 			</div>
             </a>
@@ -91,7 +123,7 @@
 					<span>Delete User Profile</span>
 					</div>
 				<div>
-					<span class="las la-shopping-bag"></span>
+					<span class="las la-users"></span>
 				</div>
 			</div>
             </a>
@@ -102,18 +134,22 @@
 					<span>View User Profile</span>
 					</div>
 				<div>
-					<span class="lab la-google-wallet"></span>
+					<span class="las la-users"></span>
 				</div>
 			</div>
             </a>
 		</div>
 
-<!-- 
+		
+
+ 
+		
 		<div class="recent-grid">
+		<a href="userList.php" >
 			<div class="projects">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="heading">Recent Projects</h3>
+						<h3 class="heading">User List</h3>
 						<button>See all <span class="las la-arrow-right"></span></button>
 					</div>
 					<div class="card-body">
@@ -121,32 +157,45 @@
 							<table width="100%">
 							<thead>
 								<tr>
-									<td>Project Title</td>
-									<td>Department</td>
-									<td>Status</td>
+									<td>User Type</td>
+									<td>Number of User</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>UI/UX Design</td>
-									<td>UI Team</td>
+									<td>System Adminstrator</td>
 									<td>
-										<span class="status purple"></span>review
+									<?php
+									$query2 = "SELECT COUNT(userID) as totalAdmin FROM user WHERE userType = 'admin'";
+                                    $result2 = mysqli_query($con, $query2);
+                                    $totalAdmin = mysqli_fetch_assoc($result2);
+									echo $totalAdmin['totalAdmin'];
+                                    ?>
 									</td>
 								</tr>
 								<tr>
-									<td>Web Dev</td>
-									<td>Frontend</td>
+									<td>UMP Staff</td>
 									<td>
-										<span class="status pink"></span>pending
+									<?php
+                                    $query4 = "SELECT COUNT(userID) as totalStaff FROM user WHERE userType = 'UMP Staff'";
+                                    $result4 = mysqli_query($con, $query4);
+                                    $totalStaff = mysqli_fetch_assoc($result4);
+									echo $totalStaff['totalStaff'];
+                                    ?>
 									</td>
+									
 								</tr>
 								<tr>
-									<td>Web Dev</td>
-									<td>Frontend</td>
+									<td>Owner</td>
 									<td>
-										<span class="status pink"></span>pending
+									<?php
+                                    $query3 = "SELECT COUNT(userID) as totalOwner FROM user WHERE userType = 'owner'";
+                                    $result3 = mysqli_query($con, $query3);
+                                    $totalOwner = mysqli_fetch_assoc($result3);
+									echo $totalOwner['totalOwner'];
+                                    ?>
 									</td>
+									
 								</tr>
 							</tbody>
 						</table>
@@ -154,65 +203,31 @@
 					</div>
 				</div>
 			</div>
+		</a>
+
+
+
+		<a href="report.php" >
 			<div class="customers">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="heading">New customer</h3>
+						<h3 class="heading">Report</h3>
 						<button>See all<span class="las la-arrow-right"></span></button>
 					</div>
 					
 					<div class="card-body">
 						<div class="customer">
-							<div class="info">
-								<img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40" alt=""> 
-								<div>
-									<h4>
-										lion Emusky</h4>
-									<small>CEO @ TLS</small>
-								</div>
-							</div>
-							<div class="contact">
-								<span class="las la-user-circle"></span>
-								<span class="las la-comment"></span>
-								<span class="las la-phone"></span>
-							</div>
+							<div id="piechart" style="width: 80%; height: 200px; margin: 0 10%; border: 1px solid #ccc"></div>
 						</div>
 						
-						<div class="customer">
-							<div class="info">
-								<img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40" alt="">
-								<div>
-									<h4>Jeam Krook</h4>
-									<small>CEO @ Penapple</small>
-								</div>
-							</div>
-							<div class="contact">
-								<span class="las la-user-circle"></span>
-								<span class="las la-comment"></span>
-								<span class="las la-phone"></span>
-							</div>
-						</div>
 						
-						<div class="customer">
-							<div class="info">
-								<img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40" alt="">
-								<div>
-									<h4>Cris Coya</h4>
-									<small>CEO @ PenCode</small>
-								</div>
-							</div>
-							<div class="contact">
-								<span class="las la-user-circle"></span>
-								<span class="las la-comment"></span>
-								<span class="las la-phone"></span>
-							</div>
-						</div>
 						
 					</div>
 				</div>
 			</div>
+		</a>
 		</div>
-	-->	
+	
 	</main>
     
 	<footer id="footer">

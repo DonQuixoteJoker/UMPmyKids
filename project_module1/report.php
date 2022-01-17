@@ -1,4 +1,11 @@
 <!--// CD19046 LEE ZI XUAN-->
+<?php
+	include('function.php');
+	error_reporting(E_ALL & ~E_NOTICE);
+	
+    $query = "SELECT *, count(userType) as number FROM user GROUP BY userType"; 
+	$result = mysqli_query($con, $query);
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -18,6 +25,27 @@
 
 </head>
 
+<script src="https://www.gstatic.com/charts/loader.js"></script>  
+<script>
+    google.charts.load('current', {'packages':['corechart']});  
+        google.charts.setOnLoadCallback(drawChart);  
+		function drawChart() {  
+            var data = google.visualization.arrayToDataTable([['type', 'number'],  
+            <?php  
+                while($row = mysqli_fetch_array($result)) {  
+                    echo "['".$row["userType"]."', ".$row["number"]."],";  
+                }  
+            ?>  
+            ]);  
+            var option = {   
+				title: 'THE TOTAL NUMBER OF USER BASED ON USER TYPE',
+				is3D:true,
+            };  
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+            chart.draw(data, option);  
+		}
+
+</script>
 
 <style>
 input[type=text], input[type=password], select 
@@ -108,7 +136,7 @@ th
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Delete User Profile
+			Report
 		</h2>
 		
 		<div class="user-wrapper">
@@ -123,84 +151,7 @@ th
         </div>
 	</header>
 	<main>
-        <div>
-            <form action="deleteUser.php" method="post">
-                <table>
-
-                    <tr style="background-color: white">
-                        <td>
-                            <th style="text-align: left;">Enter User ID:</th>
-                        </td>
-                        <td colspan="2">
-                            <input type="text" placeholder="Enter User ID" name="searchID" id="searchID">
-                        </td>
-                        <td>
-                            <button name="viewUser" value="SEARCH" class="button">SEARCH</button>
-                        </td>                    
-                    </tr>
-
-                    <tr><td></td></tr>
-                </table>
-                    <table>
-
-
-                    <tr style="background-color: #B0B8FC">
-                        <td>
-                            <th>Search Result:</th>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr style="background-color: #B0B8FC">
-                        <td>
-                            <th style="text-align: left;">User ID:</th>
-                        </td>
-                        <td>
-                            <input type="text" placeholder="Enter User ID" name="userID" id="userID" value="<?php echo $userID; ?>" readonly required>
-                        </td>
-                        <td></td>                   
-                    </tr>
-                    <tr style="background-color: #B0B8FC">
-                        <td>
-                            <th>Name:</th>
-                        </td>
-                        <td>
-                            <input type="text" placeholder="Enter Username" name="userName" id="userName" value="<?php echo $userName; ?>" readonly required>
-                        </td><td></td>
-                    </tr>
-                    <tr style="background-color: #B0B8FC">
-                        <td>
-                            <th>User Type:</th>
-                        </td>
-                        <td>
-                            <input type="text" placeholder="Enter UserType" name="userType" id="userType" value="<?php echo $userType; ?>" readonly required>
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <tr style="background-color: #B0B8FC">
-                        <td>
-                            <th>Password:</th>
-                        </td>
-                        <td>
-                            <input type="text" placeholder="Enter Password" name="userPassword" id="userPassword" value="<?php echo $userPassword; ?>" readonly required>
-                        </td>
-                        <td></td>
-                    </tr>
-
-
-                </table>
-                
-					
-				<?php include ('error.php'); ?>
-                <br>
-                <button name="deleteUser" value="DELETE" class="button" onclick="return confirm('Confirm Delete?');">DELETE</button>
-			</form>
-        </div>
-
-
-	
-
+    <div id="piechart" style="width: 80%; height: 450px; margin: 0 10%; border: 1px solid #ccc"></div>
 	</main>
     
 	<footer id="footer">

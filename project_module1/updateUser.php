@@ -1,8 +1,9 @@
+<!--// CD19046 LEE ZI XUAN-->
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
+  <title>UMP-myKids</title>
   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 <meta name="viewport" content="width=device-width initial-scale =1">
     <meta name="description" content="how to create a toggle for light and dark mode using html,css and javascript">
@@ -65,6 +66,8 @@ form
 table
 {
     padding: 20px;
+    width: 100%;
+    
 }
 
 th
@@ -110,13 +113,13 @@ th
 		</h2>
 		
 		<div class="user-wrapper">
-			<img src="https://pbs.twimg.com/media/EItl_WGU0AAEf3i.jpg" alt="" height="40" width="40">
+			<img src="https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="" height="40" width="40">
 			<div>
-				<h4>MUHD AFIF</h4>
+				<h4>USER TYPE</h4>
 				<small>Admin</small>
 			</div>
-            <div>
-                <a style="color: black;" href="function.php?logout='1'"><b>Log Out</b></a>
+            <div style="margin-left: 20px;">
+                <h3><a style="color: black;" href="function.php?logout='1'">Log Out</a></h3>
             </div>
         </div>
 	</header>
@@ -125,6 +128,7 @@ th
 
             <form action="updateUser.php" method="post">
                 <table>
+
                     
                     <tr style="background-color: white">
                         <td>
@@ -139,6 +143,9 @@ th
                     </tr>
 
                     <tr><td></td></tr>
+                </table>
+
+                <table>
             
 
 
