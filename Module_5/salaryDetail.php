@@ -1,6 +1,7 @@
 <?php
     include 'connect.php';//use connection file
 ?>
+<?php require 'Calculate.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -201,7 +202,7 @@ a:hover{
                             <div class="card-body">
                                 <div class="table-responsive">                                
 
-                                    <table width="100%">
+                                    <!--<table width="100%">
                                     <col style="width: 50%;" />
                                     <col style="width: 50%;" />
                                         <tr>
@@ -228,6 +229,60 @@ a:hover{
                                             <td>Total salary: </td>
                                             <td>RM</td>
                                         </tr>
+                                    </table>-->
+                                    
+                                    <table width="100%">
+                                    <col style="width: 50%;" />
+                                    <col style="width: 50%;" />
+                                        <?php
+
+                                        if(isset($_GET['mpID']))
+                                        {
+                                            $id=$_GET['mpID'];
+                                            $result = mysqli_query($db,"SELECT * FROM manpower where mpID='$id'");
+                                            //$result = mysqli_query($db,"SELECT FROM manpower INNER JOIN salary ON manpower.mpID=salary.mpID where mpID='$id'");
+                                            //$result = mysqli_query($db,"SELECT m.*, s.* FROM manpower m, salary s WHERE m.mpID=s.mpID ");
+                                            //$sql = "SELECT FROM manpower INNER JOIN salary ON manpower.mpID=salary.mpID";
+                                            //$result = mysqli_query($db, $sql);
+                                            while($row = mysqli_fetch_array($result))
+                                            {
+                                                ?><tr><?php
+                                                //echo "Worker name: " . $row['mpName'] . "<br>";
+                                                echo '<td>Worker name: </td>';
+                                                echo "<td>" . $row['mpName'] . "</td>";
+                                                ?></tr><?php                                                
+                                            }
+                                        }
+                                        if(isset($_GET['mpID']))
+                                        {
+                                            $id=$_GET['mpID'];
+                                            $result = mysqli_query($db,"SELECT * FROM salary where mpID='$id'");
+                                            while($row = mysqli_fetch_array($result))
+                                            {
+                                                ?><tr><?php                                                
+                                                echo '<td>Manpower ID: </td>';
+                                                echo "<td>" . $row['mpID'] . "</td>";
+                                                ?></tr><?php
+                                                ?><tr><?php                                                
+                                                echo '<td>Base salary: </td>';
+                                                echo "<td>" . $row['baseSalary'] . "</td>";
+                                                ?></tr><?php
+                                                ?><tr><?php                                                
+                                                echo '<td>Overtime hour(s): </td>';
+                                                echo "<td>" . $row['overTime'] . "</td>";
+                                                ?></tr><?php
+                                                ?><tr><?php                                                
+                                                echo '<td>Overtime payment: </td>';
+                                                //echo "<td>" . $row['?'] . "</td>";
+                                                echo "<td>" . $calc . "</td>";
+                                                ?></tr><?php
+                                                ?><tr><?php                                                
+                                                echo '<td>Total salary: </td>';
+                                                echo "<td>" . $row['totalSalary'] . "</td>";
+                                                ?></tr><?php
+                                            }
+                                        }
+                                        ?>
                                     </table>
 
                                 </div>

@@ -1,5 +1,20 @@
 <?php
-    include 'connect.php';//use connection file
+    define("DB_HOST", "localhost");
+    define("DB_NAME", "umpmykids");
+    define("DB_CHARSET", "utf8");
+    define("DB_USER", "root");
+    define("DB_PASSWORD", "");
+
+    //connect db
+    try {
+        $pdo = new PDO(
+          "mysql:host=".DB_HOST.";charset=".DB_CHARSET.";dbname=".DB_NAME,
+          DB_USER, DB_PASSWORD, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+          ]
+        );
+      } catch (Exception $ex) { exit($ex->getMessage()); }
 ?>
 
 <!DOCTYPE html>
@@ -195,28 +210,50 @@ a:hover{
                                     </thead>
                                     
                                     <?php
-                                    //fetch data from database
-                                    $records = mysqli_query($db,"SELECT * FROM salary");
+                                        //Search
+                                        
+                                        if (isset($_POST["searchID"]))
+                                        {
+                                            $stmt = $pdo->prepare("SELECT * FROM `salary` WHERE `mpID` LIKE ?");
+                                            $stmt->execute(["%".$_POST["searchID"]."%"]);
+                                            $results = $stmt->fetchAll();
+                                            if (isset($_POST["ajax"])) { echo json_encode($results); }
 
-                                    while($data = mysqli_fetch_array($records))
-                                    {   ?>
-                                    <tr>
-                                        <!--<td><a href="salaryDetail.php?id="><?php //echo $data['mpID']; ?></a></td>-->
-                                        <!--<td><a href='view.php?user_id=". $data['mp_id']."'></a><?php //echo $data['mpID']; ?></a></td>-->
-                                        <?php
-                                        echo '<td><a href=\'salaryDetail.php?mpID='.$data['mpID'].'\'>'.$data['mpID']. '</td>';
-                                        ?>
-                                        <td>RM <?php echo $data['totalSalary']; ?></td>
-                                        <td><?php echo $data['paidDate']; ?></td>
-                                        <td><?php echo $data['salaryStatus']; ?></td>
-                                        <?php
-                                            
-                                        ?>
-                                        <td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                            //Display
+                                            if (count($results) > 0) { foreach ($results as $data) {                                                
+                                                ?>
+                                                <tr>
+                                                    <!--<td><a href="salaryDetail.php"><?php //echo $data['mpID'] ?></td>-->
+                                                    <?php echo '<td><a href=\'salaryDetail.php?mpID='.$data['mpID'].'\'>'.$data['mpID']. '</td>'; ?>
+                                                    <td><?php echo $data['totalSalary'] ?></td>
+                                                    <td><?php echo $data['paidDate'] ?></td>
+                                                    <td><?php echo $data['salaryStatus'] ?></td>
+                                                    <td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>
+                                                </tr>
+                                                <?php
+                                              }} else { echo "No results found"; }
+                                              
+                                        }
+
+                                        /*if (isset($_POST["searchID"]))
+                                        {
+                                            $id = $_POST['searchID'];
+                                            $query = "SELECT * FROM salary WHERE mpID = '$id'";
+                                            $result = mysqli_query($db, $query) or die ("Could not execute query");
+
+                                            if (mysqli_num_rows($result) == 1)
+                                            {
+                                                $row = mysqli_fetch_assoc($result);
+                                                ?>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }*/
+                                        
+                                        
+                                    ?>                                    
 
                                 </table>
 
