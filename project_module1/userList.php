@@ -255,8 +255,8 @@ th
 					<tr>
 						<td><?php echo $userID  ?></td>
 						<td><?php echo $userName ?></td>
-						<td><?php echo $userPassword ?></td>
-						<td><?php echo $userType?></td>
+						<td><?php echo $userType ?></td>
+						<td><?php echo $userPassword?></td>
 						<td style="border: 2px solid #B0B8FC; background-color: #575d94;"><a href="userList_edit.php?editID=<?php echo $userID ?>"><font color="white"><u>Edit</u></font></a></td>
 						<td style="border: 2px solid #B0B8FC; background-color: #575d94;"><a href="userList_delete.php?delID=<?php echo $userID ?>"><font color="white"><u>Delete</u></font></a></td>
                         <td></td>
