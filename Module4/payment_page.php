@@ -20,6 +20,14 @@ $d_data=mysqli_fetch_assoc($d);
 //Select all data from payment table
 $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID");
 
+
+//status chart
+$received=mysqli_query($conn,"SELECT SUM(paymentAmount) as received from payment WHERE paymentStatus='Received'");
+$amountChart=mysqli_fetch_assoc($chart);
+
+//amount chart
+$chart2=mysqli_query($conn,"SELECT * from payment as statusChart GROUP BY paymentStatus");
+$statusChart=mysqli_fetch_assoc($chart2);
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +46,7 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">
 
 </head>
 
@@ -176,7 +185,7 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                                             <td><?php echo $row["paymentDate"]; ?></td>
                                             <td>
                                                 <button class="myButton viewDetail">View</button>
-                                                <button class="myButton">Remind</button>
+                                                <button class="myButton reminder">Remind</button>
                                             </td>
                             
                             </td>
@@ -192,6 +201,8 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                     </div>
                 </div>
             </div>
+
+            <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 
  <!-- VIEW MODAL -->
  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -249,6 +260,36 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
         </div>
     </div>
 
+    <!-- REMINDER MODAL -->
+ <div class="modal fade" id="remindModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="padding:10px">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form method="post" id="comment_form">
+    <div class="form-group">
+     <label>Enter Subject</label>
+     <input type="text" name="subject" id="subject" class="form-control">
+    </div>
+    <div class="form-group">
+     <label>Enter Reminder</label>
+     <textarea name="comment" id="comment" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+     <input type="submit" name="post" id="post" class="btn btn-info" value="Post" />
+    </div>
+   </form>
+
+            </div>
+        </div>
+    </div>
+
     
 
     </main>
@@ -285,8 +326,95 @@ $('.viewDetail').on('click', function () {
     $('#yearReg').val(data[4]);
     $('#status').val(data[5]);
 });
+
+$('.reminder').on('click', function () {
+
+$('#remindModal').modal('show');
+
 });
+
+function load_unseen_notification(view = '')
+ {
+  $.ajax({
+   url:"../config/fetchNotification.php",
+   method:"POST",
+   data:{view:view},
+   dataType:"json",
+   success:function(data)
+   {
+    $('.dropdown-menu').html(data.notification);
+    if(data.unseen_notification > 0)
+    {
+     $('.count').html(data.unseen_notification);
+    }
+   }
+  });
+ }
+ 
+ load_unseen_notification();
+ 
+ $('#comment_form').on('submit', function(event){
+  event.preventDefault();
+  if($('#subject').val() != '' && $('#comment').val() != '')
+  {
+   var form_data = $(this).serialize();
+   $.ajax({
+    url:"../config/insertNotification.php",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+     $('#comment_form')[0].reset();
+     load_unseen_notification();
+    }
+   });
+  }
+  else
+  {
+   alert("Both Fields are Required");
+  }
+ });
+ 
+ $(document).on('click', '.dropdown-toggle', function(){
+  $('.count').html('');
+  load_unseen_notification('yes');
+ });
+ 
+ setInterval(function(){ 
+  load_unseen_notification();; 
+ }, 5000);
+});
+
     </script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var amount = <?php echo $amountChart['amountChart']; ?>;
+
+
+        var data = google.visualization.arrayToDataTable([
+          ['Status', 'Amount'],
+          ['Teacher', amount],
+
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Payment Status',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+    
 
 </body>
 

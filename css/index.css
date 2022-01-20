@@ -280,8 +280,7 @@ body.light ::placeholder
 
 body
 {
-	background:var(--off-white);
-	background:url(https://www.teahub.io/photos/full/214-2147832_3840x2160-beautiful-hills-4k-nature-wallpaper-data-4k.jpg);
+	background:lightslategray;
 	backdrop-filter:blur(10px);
 	background-size:cover;
 	background-repeat:no-repeat;
