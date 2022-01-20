@@ -20,7 +20,12 @@ if(isset($_POST["submitCreate"])){
     $mpSalary = $_POST["mpSalary"];
     $mpHistory = $_POST["mpHistory"];
 
+    //form checked
+
+    
+
     //create mpID from last row mpid
+    
 
     $queryLastID = "SELECT * FROM manpower" or die(mysqli_error());
 

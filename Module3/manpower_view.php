@@ -64,7 +64,7 @@
 	</header>
 	<main>
 
-    <div class="recent-grid">
+    <div >
 			<div class="projects">
 				<div class="card">
 					<div class="card-body">

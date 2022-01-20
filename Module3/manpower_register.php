@@ -64,16 +64,16 @@
 	</header>
 	<main>
 
-    <div class="recent-grid">
-			<div class="projects">
-				<div class="card">
-					<div class="card-body">
+    <div>
+			<div>
+				<div>
+					<div class="card center"  style="width:400px;background:rgba(255,255,255,.4);">
 						<div class="table-responsive">
                             <form action="manpower_operation.php" method="post">
                         <table action="manpower_operation.php" method="post">
                         <tr>
                             <td>Name:</td>
-                            <td><input style="color:black;" type="text" name="mpName" placeholder="Name"></td>
+                            <td><input style="color:black;" type="text" name="mpName" placeholder="Name" required></td>
                         </tr>
                         <tr>
                             <td>Staff ID:</td>
@@ -103,31 +103,35 @@
                         </tr>
                         <tr>
                             <td>Phone No:</td>
-                            <td><input style="color:black;" type="text" name="mpPhoneNo" placeholder="Phone Number"></td>
+                            <td><input style="color:black;" type="text" name="mpPhoneNo" placeholder="Phone Number" required></td>
                         </tr>
                         <tr>
                             <td>Occupation:</td>
-                            <td><input style="color:black;" type="text" name="mpOccupation" placeholder="Occupation"></td>
+                            <td>
+                                <select name="mpOccupation">
+                                    <option value="Teacher">Teacher</option>
+                                    <option value="Caretaker">Caretaker</option>
+                                    <option value="Staff">Staff</option>
+                                </select>
+                        
+                            </td>
                         </tr>
                         <tr>
                             <td>Address:</td>
-                            <td><input style="color:black;" type="text" name="mpAddress" placeholder="Home Address"></td>
+                            <td><input style="color:black;" type="text" name="mpAddress" placeholder="Home Address" required></td>
                         </tr>
                         <tr>
                             <td>Year Registered:</td>
-                            <td><input style="color:black;" type="text" name="mpRegisterYear" placeholder="Year Registered"></td>
+                            <td><input style="color:black;" type="text" name="mpRegisterYear" placeholder="Year Registered" required></td>
                         </tr>
-                        <tr>
-                            <td>Status:</td>
-                            <td><input style="color:black;" type="text" name="mpStatus" placeholder="Status"></td>
-                        </tr>
+                        
                         <tr>
                             <td>Salary:</td>
-                            <td><input style="color:black;" type="text" name="mpSalary" placeholder="Salary"></td>
+                            <td><input style="color:black;" type="text" name="mpSalary" placeholder="Salary" required></td>
                         </tr>
                         <tr>
                             <td>History:</td>
-                            <td><input style="color:black;" type="text" name="mpHistory" placeholder="Medical History"></td>
+                            <td><input style="color:black;" type="text" name="mpHistory" placeholder="Medical History" required></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -152,6 +156,13 @@
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
-
+  <style>
+.center{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+      </style>
 </body>
 </html>

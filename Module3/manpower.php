@@ -16,6 +16,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="../css/index.css">
 <link rel="stylesheet" href="../css/manpower.css">
+<?php 
+	//database connection
+	$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
+
+	// to select the targeted database
+	mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+
+	//total admin
+	$resultTeacher = mysqli_query($con, "SELECT COUNT(*) AS totalTeacher FROM manpower WHERE mpOccupation='Teacher'");
+	$num_rowsTeacher = mysqli_fetch_assoc($resultTeacher);
+
+	//total staff
+	$resultCaretaker = mysqli_query($con, "SELECT COUNT(*) AS totalCaretaker FROM manpower WHERE mpOccupation='Caretaker'");
+	$num_rowsCaretaker = mysqli_fetch_assoc($resultCaretaker);
+
+	//total owner
+	$resultStaff = mysqli_query($con, "SELECT COUNT(*) AS totalStaff FROM manpower WHERE mpOccupation='Staff'");
+	$num_rowsStaff = mysqli_fetch_assoc($resultStaff);
+?>
+<!-- google chart javascrip -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+		  var teacher = <?php echo $num_rowsTeacher['totalTeacher']; ?>;
+		  var caretaker = <?php echo $num_rowsCaretaker['totalCaretaker']; ?>;
+		  var staff = <?php echo $num_rowsStaff['totalStaff']; ?>;
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Teacher',     teacher],
+          ['Caretaker',      caretaker],
+          ['Staff',  staff]
+        ]);
+
+        var options = {
+          title: 'UMPMYKIDS Manpower List'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
 </head>
 <body>
@@ -71,46 +118,52 @@
 	</header>
 	<main>
 
-		<div class="cards">
-			<div class="card-single">
+		<div class="cards" style="width: 100%;">
+			<a href="manpower_register.php">
+			<div class="card-single" style="width: 100%;">
 				<div>
-                    <a href="manpower_register.php">
+                    
 					<h1 id="manpower_register"></h1>
 					<span>Register Manpower</span>
-                    </a>
+                    
 				</div>
 				<div>
 					<span class="las la-users"></span>
-				</div> 
+				</div>
 			</div>
+			</a> 
+			<a href="manpower_view.php">
             <div class="card-single">
 				<div>
-                    <a href="manpower_view.php">
+                    
 					<h1 id="manpower_update"></h1>
 					<span>View Manpower</span>
-                    </a>
+                    
 				</div>
 				<div>
 					<span class="las la-users"></span>
 				</div> 
-			</div>
+			</div>	
+			</a>
+			<a href="manpower_report.php">
             <div class="card-single">
 				<div>
-                    <a href="#">
+                    
 					<h1 id="manpower_report"></h1>
-					<span>Report</span>
-                    </a>
+					<span>Manpower Report</span>
+                    
 				</div>
 				<div>
 					<span class="las la-users"></span>
 				</div> 
-			</div>			
+			</div>	
+			</a>	
 		</div>
 		<div class="recent-grid">
 			<div class="projects">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="heading">Users List</h3>
+						<h3 class="heading">Manpower List</h3>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -120,25 +173,7 @@
 									<td>User</td>
 									<td>Total</td>
 								</tr>
-								<?php 
-									//database connection
-									$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
-
-									// to select the targeted database
-									mysqli_select_db($con,"umpmykids") or die(mysqli_error());
-
-									//total admin
-									$resultTeacher = mysqli_query($con, "SELECT COUNT(*) AS totalTeacher FROM manpower WHERE mpOccupation='Teacher'");
-									$num_rowsTeacher = mysqli_fetch_assoc($resultTeacher);
-
-									//total staff
-									$resultCaretaker = mysqli_query($con, "SELECT COUNT(*) AS totalCaretaker FROM manpower WHERE mpOccupation='Caretaker'");
-									$num_rowsCaretaker = mysqli_fetch_assoc($resultCaretaker);
-
-									//total owner
-									$resultStaff = mysqli_query($con, "SELECT COUNT(*) AS totalStaff FROM manpower WHERE mpOccupation='Staff'");
-									$num_rowsStaff = mysqli_fetch_assoc($resultStaff);
-								?>
+								
 							</thead>
 							<tbody>
                                 <tr>
@@ -166,7 +201,8 @@
 					</div>
 					
 					<div class="card-body">
-						graph here
+						<!-- google graph -->
+						<div class="center" id="piechart" style="width: 100%; height: 100%;"></div>
 						
 					</div>
 				</div>
@@ -180,6 +216,14 @@
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
+  <style>
+    .center{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+</style>
 
 </body>
 </html>

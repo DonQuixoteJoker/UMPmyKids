@@ -64,10 +64,10 @@
 	</header>
 	<main>
 
-    <div class="recent-grid">
-			<div class="projects">
-				<div class="card">
-					<div class="card-body">
+    <div>
+			<div style="width:100%;">
+				<div >
+					<div class="card center"  style="width:400px;background:rgba(255,255,255,.4);">
 						<div class="table-responsive">
                             <form action="manpower_operation.php" method="post">
                         <table action="manpower_operation.php" method="post">
@@ -89,7 +89,7 @@
                             ?>                            
                         <tr>
                             <td>Name:</td>
-                            <td><input style="color:black;" type="text" name="mpName" placeholder="Name" value="<?php echo $rowView["mpName"]; ?>"></td>
+                            <td><input style="color:black;" type="text" name="mpName" placeholder="Name" value="<?php echo $rowView["mpName"]; ?>" required></td>
                         </tr>
                         <tr>
                             <td>Staff ID:</td>
@@ -117,31 +117,66 @@
                         </tr>
                         <tr>
                             <td>Phone No:</td>
-                            <td><input style="color:black;" type="text" name="mpPhoneNo" placeholder="Phone Number" value="<?php echo $rowView["mpPhoneNo"]; ?>"></td>
+                            <td><input style="color:black;" type="text" name="mpPhoneNo" placeholder="Phone Number" value="<?php echo $rowView["mpPhoneNo"]; ?>" required></td>
                         </tr>
                         <tr>
                             <td>Occupation:</td>
-                            <td><input style="color:black;" type="text" name="mpOccupation" placeholder="Occupation" value="<?php echo $rowView["mpOccupation"]; ?>"></td>
+                            <td>
+                                <select name="mpOccupation">
+                                    <?php
+                                        if($rowView["mpOccupation"]=="Teacher"){
+                                            echo "<option value='Teacher'>Teacher</option>";
+                                            echo "<option value='Caretaker'>Caretaker</option>";
+                                            echo "<option value='Staff'>Staff</option>";
+                                        }
+                                        if($rowView["mpOccupation"]=="Caretaker"){                                            
+                                            echo "<option value='Caretaker'>Caretaker</option>";
+                                            echo "<option value='Teacher'>Teacher</option>";
+                                            echo "<option value='Staff'>Staff</option>";
+                                        }
+                                        if($rowView["mpOccupation"]=="Staff"){
+                                            echo "<option value='Staff'>Staff</option>";
+                                            echo "<option value='Teacher'>Teacher</option>";
+                                            echo "<option value='Caretaker'>Caretaker</option>";                                            
+                                        }                                        
+                                    ?>
+                                </select>
+                        
+                            </td>
                         </tr>
                         <tr>
                             <td>Address:</td>
-                            <td><input style="color:black;" type="text" name="mpAddress" placeholder="Home Address" value="<?php echo $rowView["mpAddress"]; ?>"></td>
+                            <td><input style="color:black;" type="text" name="mpAddress" placeholder="Home Address" value="<?php echo $rowView["mpAddress"]; ?>" required></td>
                         </tr>
                         <tr>
                             <td>Year Registered:</td>
-                            <td><input style="color:black;" type="text" name="mpRegisterYear" placeholder="Year Registered" value="<?php echo $rowView["mpRegisterYear"]; ?>"></td>
+                            <td><input style="color:black;" type="text" name="mpRegisterYear" placeholder="Year Registered" value="<?php echo $rowView["mpRegisterYear"]; ?>" required></td>
                         </tr>
                         <tr>
                             <td>Status:</td>
-                            <td><input style="color:black;" type="text" name="mpStatus" placeholder="Status" value="<?php echo $rowView["mpStatus"]; ?>"></td>
+                            <td>
+                                <select name="mpStatus">
+                                <?php
+                                        if($rowView["mpStatus"]=="Active"){
+                                            echo "<option value='Active'>Active</option>";
+                                            echo "<option value='Terminated'>Terminated</option>";
+                                        }
+                                        if($rowView["mpStatus"]=="Terminated"){                                            
+                                            echo "<option value='Terminated'>Terminated</option>";
+                                            echo "<option value='Active'>Active</option>";
+                                        }                                       
+                                    ?>
+                                </select>
+                        
+                            </td>
                         </tr>
                         <tr>
                             <td>Salary:</td>
-                            <td><input style="color:black;" type="text" name="mpSalary" placeholder="Salary" value="<?php echo $rowView["mpSalary"]; ?>"></td>
+                            <td><input style="color:black;" type="text" name="mpSalary" placeholder="Salary" value="<?php echo $rowView["mpSalary"]; ?>" required></td>
                         </tr>
                         <tr>
                             <td>History:</td>
-                            <td><input style="color:black;" type="text" name="mpHistory" placeholder="Medical History" value="<?php echo $rowView["mpHistory"]; ?>"></td>
+                            <td><input style="color:black;" type="text" name="mpHistory" placeholder="Medical History" value="<?php echo $rowView["mpHistory"]; ?>" required></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -169,6 +204,14 @@
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
+  <style>
+.center{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+      </style>
 
 </body>
 </html>
