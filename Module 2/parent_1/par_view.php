@@ -44,39 +44,29 @@ if(!$row) {
     <h2>Parent Profile</h2>
 	
 	<div class="input-group">
-			
 			<label>Parent Id : <?php echo $parID; ?></label>
-			
-
 		</div>
+		
 		<div class="input-group">
-			
 		<label>Name : <?php echo $parName; ?></label>
-			
 		</div>
+		
 		<div class="input-group">
-			
 		<label>Phone Number : <?php echo $parPhoneNum; ?></label>
-		
 		</div>
 
 		<div class="input-group">
-		
-		<label>Address : <?php echo $parAddress; ?></label>
-
+			<label>Address : <?php echo $parAddress; ?></label>
 		</div>
 
 		<div class="input-group">
-		
 		<label>Year Registered : <?php echo $parYearReg; ?></label>
-		
 		</div>
 
 		<div class="input-group">
-		
-		<label>Status : <?php echo $parStatus; ?></label>
-		
+		<label>Status : <?php echo $parStatus; ?></label>	
 		</div>
+		
 		<div class="input-group">
             <input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
 		</div>
