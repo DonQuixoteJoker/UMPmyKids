@@ -50,37 +50,32 @@ if(!$row) {
 
 		</div>
 		<div class="input-group">
-			<tr>
-			<td>Name :</label>
-			<td><?php echo $parName; ?>
-</tr>
+			
+		<label>Name : <?php echo $parName; ?></label>
+			
 		</div>
 		<div class="input-group">
-			<tr>
-		<td>Phone Number : </td>
-		<td><?php echo $parPhoneNum; ?></td>
-		</tr>
+			
+		<label>Phone Number : <?php echo $parPhoneNum; ?></label>
+		
 		</div>
 
 		<div class="input-group">
-		<tr>
-		<td>Address :</td>
-		<td><?php echo $parAddress; ?></td>
-		</tr>
+		
+		<label>Address : <?php echo $parAddress; ?></label>
+
 		</div>
 
 		<div class="input-group">
-		<tr>
-		<td>Year Registered :</td>
-		<td><?php echo $parYearReg; ?></td>
-		</tr>
+		
+		<label>Year Registered : <?php echo $parYearReg; ?></label>
+		
 		</div>
 
 		<div class="input-group">
-		<tr>
-		<td>Status :</td>
-		<td><?php echo $parStatus; ?></td>
-		</tr>
+		
+		<label>Status : <?php echo $parStatus; ?></label>
+		
 		</div>
 		<div class="input-group">
             <input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
