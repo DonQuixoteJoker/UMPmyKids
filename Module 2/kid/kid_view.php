@@ -41,47 +41,35 @@ if(!$row) {
 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
 	<form method="post" action="edit_kid_func.php" >
 	<h2>Kid Profile</h2>
-	<table>
-        <div class="input-group">
-			<tr>
-			<td>Kid Id : </td>
-			<td><?php echo $kidId; ?></td>
-        </tr>
+		
+	<div class="input-group">
+			<label>Kid Id : <?php echo $kidId; ?> </label>	
 		</div>
+		
 		<div class="input-group">
-			<tr>
-			<td>Name : </td>
-			<td><?php echo $kidName; ?></td>
-</tr>
+			<label>Name : <?php echo $kidName; ?></label>		
 		</div>
-		<div class="input-group">
-			<tr>
-			<td>Gender : </td>
-			<td><?php echo $kidGender; ?></td>
-</tr>
+		
+		<div class="input-group">			
+			<label>Gender : <?php echo $kidGender; ?> </label>			
 		</div>
-		<div class="input-group">
-			<tr>
-			<td>Date of Birth : </td>
-			<td> <?php echo $kidDob; ?> </td>
-</tr>
+		
+		<div class="input-group">			
+			<label>Date of Birth : <?php echo $kidDob; ?>  </label>
 		</div>
-		<div class="input-group">
-			<tr>
-			<td>Race : </td>
-			<td><?php echo $kidRace; ?></td>
-</tr>
+		
+		<div class="input-group">			
+			<label>Race : <?php echo $kidRace; ?> </label>
 		</div>
-		<div class="input-group">
-			<tr>
-			<td>Allergy : </td>
-			<td><?php echo $kidAllergy; ?> </td>
-</tr>
+		
+		<div class="input-group">			
+			<label>Allergy : <?php echo $kidAllergy; ?></label>			
 		</div>
+		
 		<div class="input-group">
             <input type="hidden" value="<?php echo $row["kidId"]; ?>" name="kid_id">
 		</div>
-</table>
+		
 	</form>
 	
 </body>
