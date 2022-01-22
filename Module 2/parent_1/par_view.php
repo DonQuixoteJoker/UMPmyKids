@@ -48,10 +48,17 @@ if(!$row) {
 		</div>
 		
 		<div class="input-group">
+<<<<<<< Updated upstream
 		<label>Name : <?php echo $parName; ?></label>
+=======
+			
+		<label>Name : <?php echo $parName; ?></label>
+			
+>>>>>>> Stashed changes
 		</div>
 		
 		<div class="input-group">
+<<<<<<< Updated upstream
 		<label>Phone Number : <?php echo $parPhoneNum; ?></label>
 		</div>
 
@@ -65,13 +72,35 @@ if(!$row) {
 
 		<div class="input-group">
 		<label>Status : <?php echo $parStatus; ?></label>	
+=======
+			
+		<label>Phone Number : <?php echo $parPhoneNum; ?></label>
+		
+		</div>
+
+		<div class="input-group">
+		
+		<label>Address : <?php echo $parAddress; ?></label>
+
+		</div>
+
+		<div class="input-group">
+		
+		<label>Year Registered : <?php echo $parYearReg; ?></label>
+		
+		</div>
+
+		<div class="input-group">
+		
+		<label>Status : <?php echo $parStatus; ?></label>
+		
+>>>>>>> Stashed changes
 		</div>
 		
 		<div class="input-group">
             <input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
 		</div>
 </div>
-</table>
 </div>
 	</form>
 

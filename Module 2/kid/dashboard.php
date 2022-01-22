@@ -95,7 +95,7 @@
 
   <div class="column">
     <div class="card">
-    <a href="kid_list.php"><h3>Report</h3></a>
+    <a href="kid_report.php"><h3>Report</h3></a>
     </div>
   </div>
 

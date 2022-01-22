@@ -77,14 +77,14 @@ form {
   background: #808080;
 }
 .msg {
-  margin: 30px auto; 
-  padding: 10px; 
-  border-radius: 5px; 
-  color: #3c763d; 
-  background: #dff0d8; 
-  border: 1px solid #3c763d;
-  width: 50%;
-  text-align: center;
+  margin: auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    color: #3c763d; 
+    background: #dff0d8; 
+    border: 1px solid #3c763d;
+    width: 30%;
+    text-align: center;
 }
 
 .msg-danger {

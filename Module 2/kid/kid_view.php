@@ -41,12 +41,20 @@ if(!$row) {
 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
 	<form method="post" action="edit_kid_func.php" >
 	<h2>Kid Profile</h2>
+<<<<<<< Updated upstream
 		
 	<div class="input-group">
 			<label>Kid Id : <?php echo $kidId; ?> </label>	
+=======
+	
+        <div class="input-group">
+			<label>Kid Id : <?php echo $kidId; ?> </label>
+			
+>>>>>>> Stashed changes
 		</div>
 		
 		<div class="input-group">
+<<<<<<< Updated upstream
 			<label>Name : <?php echo $kidName; ?></label>		
 		</div>
 		
@@ -64,12 +72,41 @@ if(!$row) {
 		
 		<div class="input-group">			
 			<label>Allergy : <?php echo $kidAllergy; ?></label>			
+=======
+			
+			<label>Name : <?php echo $kidName; ?></label>
+			
+		</div>
+		<div class="input-group">
+			
+			<label>Gender : <?php echo $kidGender; ?> </label>
+			
+		</div>
+		<div class="input-group">
+			
+			<label>Date of Birth : <?php echo $kidDob; ?>  </label>
+
+		</div>
+		<div class="input-group">
+			
+			<label>Race : <?php echo $kidRace; ?> </label>
+
+		</div>
+		<div class="input-group">
+			
+			<label>Allergy : <?php echo $kidAllergy; ?></label>
+			
+>>>>>>> Stashed changes
 		</div>
 		
 		<div class="input-group">
             <input type="hidden" value="<?php echo $row["kidId"]; ?>" name="kid_id">
 		</div>
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 	</form>
 	
 </body>

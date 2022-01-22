@@ -5,7 +5,7 @@ include("db.php");
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kid List</title>
+        <title>Kid List </title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 	<style>

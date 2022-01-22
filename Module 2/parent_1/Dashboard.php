@@ -49,7 +49,7 @@
 
   <div class="column1">
     <div class="card">
-      <a href="Dashboard.php"><h3>Report</h3></a>
+      <a href="par_report.php"><h3>Report</h3></a>
     </div>
   </div>
   
