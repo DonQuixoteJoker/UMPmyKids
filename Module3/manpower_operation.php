@@ -1,9 +1,11 @@
 <?php 
 //database connection
-$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
+//$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
 
 // to select the targeted database
-mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+//mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+
+include 'dbConn.php';
 
 
 //button submit create new manpower
@@ -16,7 +18,7 @@ if(isset($_POST["submitCreate"])){
     $mpOccupation = $_POST["mpOccupation"];
     $mpAddress = $_POST["mpAddress"];
     $mpRegisterYear = $_POST["mpRegisterYear"];
-    $mpStatus = $_POST["mpStatus"];
+    $mpStatus = "Active";
     $mpSalary = $_POST["mpSalary"];
     $mpHistory = $_POST["mpHistory"];
 

@@ -75,10 +75,12 @@
                                         <!-- manpower all status active/terminate-->
                                         <?php 
                                             //database connection
-	                                        $con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
+	                                        //$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
 
 	                                        // to select the targeted database
-	                                        mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+	                                        //mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+
+                                            include 'dbConn.php';
 
                                             // all status
                                             $resultActive = mysqli_query($con, "SELECT COUNT(*) AS active FROM manpower WHERE mpStatus='Active'");

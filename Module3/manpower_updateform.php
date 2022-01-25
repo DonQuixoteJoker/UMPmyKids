@@ -73,10 +73,13 @@
                         <table action="manpower_operation.php" method="post">
                             <?php 
                                 //database connection
-                                $con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
+                                //$con = mysqli_connect("localhost", "root") or die(mysqli_connect_error());
 
                                 // to select the targeted database
-                                mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+                                //mysqli_select_db($con,"umpmykids") or die(mysqli_error());
+
+                                include 'dbConn.php';
+                                
                                 $mpID = $_POST['mpID'];
 
                                 $sqlView = "SELECT * FROM manpower WHERE mpID = '$mpID'";
