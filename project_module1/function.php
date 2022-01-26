@@ -34,10 +34,10 @@ session_start();
 					header('location: adminDashboard.php');
 				} else if($userType == "owner") 
                 {
-					header('location: adminDashboard.php');
+					;
 				} else if($userType == "UMP Staff") 
                 {
-					header('location: adminDashboard.php');
+					;
 				} 
 			}
 		} 
