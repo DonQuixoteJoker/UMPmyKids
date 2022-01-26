@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2021 at 04:00 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Jan 06, 2022 at 07:07 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,11 +49,27 @@ CREATE TABLE `manpower` (
   `mpPhoneNo` varchar(10) NOT NULL,
   `mpOccupation` varchar(10) NOT NULL,
   `mpAddress` varchar(10) NOT NULL,
-  `mpRegisterYear` date NOT NULL,
+  `mpRegisterYear` int(4) NOT NULL,
   `mpStatus` varchar(10) NOT NULL,
   `mpSalary` int(11) NOT NULL,
   `mpHistory` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `manpower`
+--
+
+INSERT INTO `manpower` (`mpID`, `userID`, `mpName`, `mpPhoneNo`, `mpOccupation`, `mpAddress`, `mpRegisterYear`, `mpStatus`, `mpSalary`, `mpHistory`) VALUES
+('MP001', 'U001', 'Adwin', '0320729800', 'Teacher', 'Gambang', 2021, 'Active', 1200, 'None'),
+('MP0010', 'U010', 'Asyraf Adnan', '087418700 ', 'Teacher', 'Kuantan', 2021, 'Active', 1200, 'Blood Pressure'),
+('MP002', 'U002', 'Wong', '0321445466', 'Staff', 'Pekan', 2021, 'Active', 1200, 'None'),
+('MP003', 'U003', 'Nicole', '082641001 ', 'Caretaker', 'Kuantan', 2021, 'Active', 1200, 'None'),
+('MP004', 'U004', 'Emily', '0340213286', 'Staff', 'Gambang', 2021, 'Active', 1200, 'Heart Attack'),
+('MP005', 'U005', 'Che Ku', '0377844262', 'Caretaker', 'Gambang', 2021, 'Terminated', 1200, 'Blood Pressure'),
+('MP006', 'U006', 'Muhammad Amir', '0332902193', 'Caretaker', 'Kuantan', 2021, 'Terminated', 1200, 'None'),
+('MP007', 'U007', 'Lukman Hakim', '0374929180', 'Staff', 'Kuantan', 2021, 'Active', 1200, 'Blood Pressure'),
+('MP008', 'U008', 'Muhammad Afif', '073343518 ', 'Teacher', 'Pekan', 2021, 'Active', 1200, 'Heart Attack'),
+('MP009', 'U009', 'Amirul Syafiq', '064576022', 'Caretaker', 'Pekan', 2021, 'Active', 1200, 'None');
 
 -- --------------------------------------------------------
 
