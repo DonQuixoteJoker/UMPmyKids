@@ -91,7 +91,7 @@ th
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="#"><span class="la la-user-circle"></span>
+	 			<a href="manpower.php"><span class="la la-user-circle"></span>
 	 				<span>Manpower</span>
 	 			</a>
 	 		</li>
