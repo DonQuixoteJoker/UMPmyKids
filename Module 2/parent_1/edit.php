@@ -16,12 +16,155 @@ if(!$row) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-	<title>Update Parent Profile</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>UMP-myKids</title>
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+<meta name="viewport" content="width=device-width initial-scale =1">
+    <meta name="description" content="how to create a toggle for light and dark mode using html,css and javascript">
+<meta name="description" content="toggle dark/light mode">
+<meta name="tags" content="toggle,darkmode,web design,admin dashboard,glassmorphism,codepen">
+<meta name="description" content="design a website">
+<meta name="description" content="create a glassmorphism website">
+    <meta name="keyword" content="dark mode, html,css,javascript, coding, programming, how to,learn">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
+
 </head>
+<style>
+input 
+{
+	width: 100%;
+	padding: 15px 50px;
+	margin: 8px 0;
+	display: inline-block;
+	box-sizing: border-box;
+    color:black;
+    font-size: 15px;
+
+
+}
+
+.button {
+    background-color: #C3C3C3;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.container 
+{
+	padding: 20px;
+}
+
+form
+{
+    background-color: #E5E5E5;
+    text-align: center;
+    border-radius: 9px;
+    padding: 100px;
+    font-size: 20px;
+    margin-left:15%;
+    margin-right:20%;
+    align-items: center;
+}
+
+table
+{
+    padding: 20px;
+	width: 100%;
+}
+
+th
+{
+    text-align: left;
+}
+
+.msg {
+    margin: auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    color: #3c763d; 
+    background: #dff0d8; 
+    border: 1px solid #3c763d;
+    width: 30%;
+    text-align: center;
+}
+
+.msg-danger {
+    margin: 30px auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    color: red; 
+    background: #dff0d8; 
+    border: 1px solid red;
+    width: 50%;
+    text-align: center;
+}
+</style>
 <body>
+	<!-- partial:index.partial.html -->
+	<input type="checkbox" id="nav-toggle"> 
+
+<div class="sidebar">
+ 	<div class="sidebar-brand">
+ 		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
+ 	</div>
+	 <div class="sidebar-menu">
+	 	<ul>
+	 		<li>
+	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 				<span>Dashboard</span>
+	 			</a>
+	 		</li>
+			<li>
+	 			<a href="index.php"><span class="la la-user-circle"></span>
+	 				<span>Parent</span>
+	 			</a>
+	 		</li>
+             <li>
+	 			<a href="../kid/index.php"><span class="la la-user-circle"></span>
+	 				<span>Kid</span>
+	 			</a>
+	 		</li>
+	 	</ul>
+	 </div>
+ </div>
+
+ <div class="main-content">
+	<header>
+		<h2 class="heading" id="dashboard">
+			<label for="nav-toggle">
+				<span class="las la-bars"></span>
+			</label>
+			Update Parent Profile
+		</h2>
+		
+		<div class="user-wrapper">
+			<img src="https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="" height="40" width="40">
+			<div>
+				<h4>USER TYPE</h4>
+				<small>Admin</small>
+			</div>
+            <div style="margin-left: 20px;">
+                <h3><a style="color: black;" href="function.php?logout='1'">Log Out</a></h3>
+            </div>
+        </div>
+	</header>
+
+<body>
+<main>
+
 <?php if (isset($_SESSION['message'])): ?>
 	<div class="msg">
 		<?php 
@@ -31,50 +174,74 @@ if(!$row) {
 	</div>
 <?php endif ?>
 
-<ul>
-  <li><img src="logo.png" width="150px"></li>
-  <li><a href="Dashboard.php">Dashboard</a></li>
-  <li><a href="Dashboard.php">Parent</a></li>
-  <li><a href="../kid/dashboard.php">Kid</a></li>
-  
-</ul>
+        <div>
+            <form action="functions/editProfile.func.php" method="post">
+                <table>
+                    <tr>
+                        <td>
+							<th>Parent Id:</th>
+</td>
+                     <td>
+						<input type="text" name="parID" value="<?php echo $parID; ?>" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <th>Name:</th>
+                        </td>
+                        <td>
+						<input type="text" name="name" value="<?php echo $parName; ?>">
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                            <th>Phone Number:</th>
+                        </td>
+                        <td>
+						<input type="number" name="phoneNum" value="<?php echo $parPhoneNum; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <th>Address:</th>
+                        </td>
+                        <td>
+						<input type="text" name="address" value="<?php echo $parAddress; ?>">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <th>Registration Year:</th>
+                        </td>
+                        <td>
+						<input type="number" name="yearReg" value="<?php echo $parYearReg; ?>">
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                            <th>Status:</th>
+                        </td>
+                        <td>
+						<input type="text" name="status" value="<?php echo $parStatus; ?>">
+                        </td>
+                    </tr>
 
-<div style="margin-left:25%;padding:1px 16px;height:1000px;">
-	<form method="post" action="functions/editProfile.func.php" >
-    <h2>Update Parent Profile</h2>    
-	<div class="input-group">
-			<label>ID</label>
-			<input type="text" name="parID" value="<?php echo $parID; ?>" disabled>
-		</div>
-		<div class="input-group">
-			<label>Name</label>
-			<input type="text" name="name" value="<?php echo $parName; ?>">
-		</div>
-		<div class="input-group">
-			<label>Phone Number </label>
-			<input type="number" name="phoneNum" value="<?php echo $parPhoneNum; ?>">
-		</div>
-		<div class="input-group">
-			<label>Address</label>
-			<input type="text" name="address" value="<?php echo $parAddress; ?>">
-		</div>
-		<div class="input-group">
-			<label>Year Registered</label>
-			<input type="number" name="yearReg" value="<?php echo $parYearReg; ?>">
-		</div>
-		<div class="input-group">
-			<label>Status</label>
-			<input type="text" name="status" value="<?php echo $parStatus; ?>">
-		</div>
-		<div class="input-group">
-            <input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
-			<div class="flex-parent jc-center">
-			<button class="btn" type="submit" name="update" >Update</button>
-			<a href="par_list_upd.php" class="btn" type="submit" name="cancel" >Cancel</a>
-</div>
-		</div>
-</div>
+					<tr>
+					<input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
+			
+			<td><button class="button" type="submit" name="update" >Update</button><td>
+			<td><a href="par_list_upd.php" class="button" type="submit" name="cancel" >Cancel</a></button></td>
+</tr>
+</table>
 	</form>
-	
+</main>
+	<footer id="footer">
+	<p>Copyright 2021, All Right Reserved</p>
+
+</footer>
+</div>
+<!-- partial -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
 </body>
 </html>
