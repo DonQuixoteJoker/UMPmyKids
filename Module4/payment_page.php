@@ -63,7 +63,7 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                     </a>
                 </li>
                 <li>
-                    <a href="#" style="text-decoration:none"><span class="las la-shopping-bag"></span>
+                    <a href="../Module_5/salaryMain.php" style="text-decoration:none"><span class="las la-shopping-bag"></span>
                         <span>Salary</span>
                     </a>
                 </li>
