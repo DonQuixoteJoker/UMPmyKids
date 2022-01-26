@@ -169,25 +169,6 @@ a:hover{
 
         <div class="bigbox">
             <div class="head">
-                <!--<form action="salaryMain.php" method="post">
-                    <table>
-                        
-                        
-                        <tr style="background-color: #D3D3D3">
-                            <td>
-                                <th style="text-align: left;">Enter MP ID:</th>
-                            </td>
-                            <td colspan="2">
-                                <input type="text" placeholder="Search Worker ID" name="searchID" id="searchID">
-                            </td>
-                            <td>
-                                <button name="viewWorker" value="SEARCH" class="button">SEARCH</button>
-                            </td>                    
-                        </tr>            
-                    
-                    </table>
-                                                                    
-                </form>-->
                 SALARY DETAILS                            
             </div>
             <div class="float-child2">
@@ -200,36 +181,7 @@ a:hover{
                         <div class="card">
                         
                             <div class="card-body">
-                                <div class="table-responsive">                                
-
-                                    <!--<table width="100%">
-                                    <col style="width: 50%;" />
-                                    <col style="width: 50%;" />
-                                        <tr>
-                                            <td>Worker name: </td>
-                                            <td>Nicole</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Manpower ID: </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Base salary: </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Overtime hour(s): </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Overtime payment: </td>
-                                            <td>RM</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total salary: </td>
-                                            <td>RM</td>
-                                        </tr>
-                                    </table>-->
+                                <div class="table-responsive">
                                     
                                     <table width="100%">
                                     <col style="width: 50%;" />
@@ -240,14 +192,9 @@ a:hover{
                                         {
                                             $id=$_GET['mpID'];
                                             $result = mysqli_query($db,"SELECT * FROM manpower where mpID='$id'");
-                                            //$result = mysqli_query($db,"SELECT FROM manpower INNER JOIN salary ON manpower.mpID=salary.mpID where mpID='$id'");
-                                            //$result = mysqli_query($db,"SELECT m.*, s.* FROM manpower m, salary s WHERE m.mpID=s.mpID ");
-                                            //$sql = "SELECT FROM manpower INNER JOIN salary ON manpower.mpID=salary.mpID";
-                                            //$result = mysqli_query($db, $sql);
                                             while($row = mysqli_fetch_array($result))
                                             {
                                                 ?><tr><?php
-                                                //echo "Worker name: " . $row['mpName'] . "<br>";
                                                 echo '<td>Worker name: </td>';
                                                 echo "<td>" . $row['mpName'] . "</td>";
                                                 ?></tr><?php                                                
@@ -273,7 +220,6 @@ a:hover{
                                                 ?></tr><?php
                                                 ?><tr><?php                                                
                                                 echo '<td>Overtime payment: </td>';
-                                                //echo "<td>" . $row['?'] . "</td>";
                                                 echo "<td>" . $calc . "</td>";
                                                 ?></tr><?php
                                                 ?><tr><?php                                                

@@ -150,9 +150,6 @@ a:hover{
                     
                     
                     <tr style="background-color: #D3D3D3">
-                        <!--<td>
-                            <th style="text-align: left;">Enter MP ID:</th>
-                        </td>-->
                         <td colspan="2">
                             <input type="text" placeholder="Search Worker ID" name="searchID" id="searchID">
                         </td>
@@ -182,7 +179,7 @@ a:hover{
                                 <col style="width: 20%;" />
                                 <col style="width: 20%;" />
                                 <col style="width: 10%;" />
-                                <!--<col style="width: 10%;" />-->
+                                
                                     <thead>
                                         <tr>
                                             <td>Manpower ID</td>
@@ -190,7 +187,7 @@ a:hover{
                                             <td>Date</td>
                                             <td>Status</td>
                                             <td>Reminder</td>
-                                            <!--<td style="text-align:center;">Action</td>-->
+                                            
                                         </tr>
                                     </thead>
                                     
@@ -201,8 +198,6 @@ a:hover{
                                     while($data = mysqli_fetch_array($records))
                                     {   ?>
                                     <tr>
-                                        <!--<td><a href="salaryDetail.php?id="><?php //echo $data['mpID']; ?></a></td>-->
-                                        <!--<td><a href='view.php?user_id=". $data['mp_id']."'></a><?php //echo $data['mpID']; ?></a></td>-->
                                         <?php
                                         echo '<td><a href=\'salaryDetail.php?mpID='.$data['mpID'].'\'>'.$data['mpID']. '</td>';
                                         ?>
@@ -212,8 +207,15 @@ a:hover{
                                         <?php
                                             
                                         ?>
-                                        <td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>
+                                        
+                                        <?php if($data['salaryStatus']=="Paid"){ ?> 
+                                            <td>PAID</td>
+                                        <?php } else { ?>
+                                            
+                                            <td><button type="button" onclick='window.location.replace("../project_module1/adminDashboard.php")' id="myButton" class="remindbutton">Remind</button></td>
+                                        <?php } ?>
                                     </tr>
+                                    
                                     <?php
                                     }
                                     ?>
@@ -221,7 +223,6 @@ a:hover{
                                 </table>
 
                                 </form>
-
                             </div>
 
                         </div>
