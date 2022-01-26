@@ -31,7 +31,7 @@ session_start();
 					header('location: adminDashboard.php');
 				} else if($userType == "owner") 
                 {
-					;
+					header('location: ../owner_dashboard.php');
 				} else if($userType == "UMP Staff") 
                 {
 					;
