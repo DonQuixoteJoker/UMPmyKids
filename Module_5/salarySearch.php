@@ -227,8 +227,7 @@ a:hover{
                                                     <?php echo '<td><a href=\'salaryDetail.php?mpID='.$data['mpID'].'\'>'.$data['mpID']. '</td>'; ?>
                                                     <td><?php echo $data['totalSalary'] ?></td>
                                                     <td><?php echo $data['paidDate'] ?></td>
-                                                    <td><?php echo $data['salaryStatus'] ?></td>
-                                                    <!--<td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>-->
+                                                    <td><?php echo $data['salaryStatus'] ?></td>                                                    
                                                     <?php if($data['salaryStatus']=="Paid"){ ?> 
                                                         <td>PAID</td>
                                                     <?php } else { ?>
