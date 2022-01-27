@@ -1,5 +1,18 @@
 <?php 
-include('php_code.php');
+session_start();
+include("include/db.inc.php");
+
+$parID = intval($_GET["id"]);
+$sql = "SELECT * FROM parent WHERE parID = '$parID'";
+$result = mysqli_query($db, $sql);
+$row = mysqli_fetch_assoc($result);
+
+extract($row);
+
+if(!$row) {
+    echo "<script>alert('Invalid Page'); window.history.go(-1);</script>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +33,6 @@ include('php_code.php');
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
 
 </head>
-
 <style>
 input 
 {
@@ -77,36 +89,9 @@ th
 {
     text-align: left;
 }
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-.msg {
-  margin: auto; 
-    padding: 10px; 
-    border-radius: 5px; 
-    color: #3c763d; 
-    background: #dff0d8; 
-    border: 1px solid #3c763d;
-    width: 30%;
-    text-align: center;
-}
-
-.msg-danger {
-  margin: 30px auto; 
-  padding: 10px; 
-  border-radius: 5px; 
-  color: red; 
-  background: #dff0d8; 
-  border: 1px solid red;
-  width: 50%;
-  text-align: center;
-}
 </style>
-
 <body>
-
-<!-- partial:index.partial.html -->
+	<!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
 
 <div class="sidebar">
@@ -114,19 +99,24 @@ th
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
-	 			<a href="index.php"><span class="la la-user-circle"></span>
+			 <li>
+	 			<a href="../kids/index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
@@ -140,7 +130,7 @@ th
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Kid Registration
+			Parent Profile
 		</h2>
 		
 		<div class="user-wrapper">
@@ -155,7 +145,6 @@ th
         </div>
 	</header>
 
-<main>
 <?php if (isset($_SESSION['message'])): ?>
 	<div class="msg">
 		<?php 
@@ -165,57 +154,50 @@ th
 	</div>
 <?php endif ?>
 
-        <div>
-            <form action="reg_kid_function.php" method="post">
-                <table>
-                    <tr>
-                        <td>
-                            <th>Name:</th>
-                        </td>
-                        <td>
-						<input type="text" name="name">
-                        </td>
-                    </tr>
-					<tr>
-                        <td>
-                            <th>Gender:</th>
-                        </td>
-                        <td>
-						<input type="text" name="gender">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <th>Date of Birth:</th>
-                        </td>
-                        <td>
-						<input type="date" name="dob">
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <th>Race:</th>
-                        </td>
-                        <td>
-						<input type="text" name="race">
-                        </td>
-                    </tr>
-					<tr>
-                        <td>
-                            <th>Allergy:</th>
-                        </td>
-                        <td>
-						<<input type="text" name="allergy">
-                        </td>
-                    </tr>
+<main>
+<div style="margin-left:15%;padding:100px 16px;height:1000px;">
+	<form method="post" action="functions/editProfile.func.php" >
+    <h2>Parent Profile</h2>
+	
+	<div class="input-group">
+			<label>Parent Id : <?php echo $parID; ?></label>
+		</div>
+		
+		<div class="input-group">
+			
+		<label>Name : <?php echo $parName; ?></label>
+			
+		</div>
+		
+		<div class="input-group">
+			
+		<label>Phone Number : <?php echo $parPhoneNum; ?></label>
+		
+		</div>
 
-                    <tr>
-					<div class="center">	
-					<td><button class="button" type="submit" name="save" >Save</button></td>
-					<td><button class="button" type="reset" name="clear" >Clear</button></td>
-</tr>
-                </table>
+		<div class="input-group">
+		
+		<label>Address : <?php echo $parAddress; ?></label>
+
+		</div>
+
+		<div class="input-group">
+		
+		<label>Year Registered : <?php echo $parYearReg; ?></label>
+		
+		</div>
+
+		<div class="input-group">
+		
+		<label>Status : <?php echo $parStatus; ?></label>
+		
+		</div>
+		
+		<div class="input-group">
+            <input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
+		</div>
+</div>
+</div>
 	</form>
 </main>
 <footer id="footer">
@@ -225,6 +207,7 @@ th
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
+
 
 </body>
 </html>

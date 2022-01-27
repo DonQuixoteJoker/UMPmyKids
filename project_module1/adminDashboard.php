@@ -64,8 +64,18 @@
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="#"><span class="la la-user-circle"></span>
+	 			<a href="../Module3/manpower.php"><span class="la la-user-circle"></span>
 	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="../Module2/parent_1/index.php"><span class="la la-user-circle"></span>
+	 				<span>Parent</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="../Module2/kid/index.php"><span class="la la-user-circle"></span>
+	 				<span>Kid</span>
 	 			</a>
 	 		</li>
 	 	</ul>
@@ -144,7 +154,7 @@
 
  
 		
-		<div class="recent-grid">
+		<div class="recent-grid" >
 		<a href="userList.php" >
 			<div class="projects">
 				<div class="card">

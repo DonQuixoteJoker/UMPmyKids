@@ -20,15 +20,10 @@
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+     <ul>
 	 		<li>
-	 			<a href="index.html" class="active"><span class="las la-igloo"></span>
+	 			<a href="../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
-	 		    </a>
-	 		</li>
-			<li>
-	 			<a href="#"><span class="las la-users"></span>
-	 				<span>Student</span>
 	 			</a>
 	 		</li>
 			<li>
@@ -36,9 +31,14 @@
 	 				<span>Manpower</span>
 	 			</a>
 	 		</li>
-			<li>
-	 			<a href="#"><span class="las la-shopping-bag"></span>
-	 				<span>Payment</span>
+			 <li>
+	 			<a href="../Module2/parent_1/index.php"><span class="la la-user-circle"></span>
+	 				<span>Parent</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="../Module2/kid/index.php"><span class="la la-user-circle"></span>
+	 				<span>Kid</span>
 	 			</a>
 	 		</li>
 	 	</ul>

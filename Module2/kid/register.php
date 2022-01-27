@@ -1,7 +1,7 @@
 <?php 
-session_start();
-include("db.php");
+include('php_code.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -20,22 +20,67 @@ include("db.php");
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
 
 </head>
+
 <style>
-	th, td
+input 
 {
-	background-color:"white";
-    padding: 20px;
-	width: 10%;
-	border:1px solid black;
-  border-collapse:collapse;
-	text-align: left;
+	width: 100%;
+	padding: 15px 50px;
+	margin: 8px 0;
+	display: inline-block;
+	box-sizing: border-box;
+    color:black;
+    font-size: 15px;
+
+
 }
 
+.button {
+    background-color: #C3C3C3;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.container 
+{
+	padding: 20px;
+}
+
+form
+{
+    background-color: #E5E5E5;
+    text-align: center;
+    border-radius: 9px;
+    padding: 100px;
+    font-size: 20px;
+    margin-left:15%;
+    margin-right:20%;
+    align-items: center;
+}
+
+table
+{
+    padding: 20px;
+	width: 100%;
+}
+
+th
+{
+    text-align: left;
+}
 .center {
   margin-left: auto;
   margin-right: auto;
 }
-
 .msg {
   margin: auto; 
     padding: 10px; 
@@ -57,16 +102,11 @@ include("db.php");
   width: 50%;
   text-align: center;
 }
-.del_btn {
-  text-decoration: none;
-  padding: 4px 6px;
-  color: white;
-  border-radius: 3px;
-  background: #808080;
-}
 </style>
+
 <body>
-	<!-- partial:index.partial.html -->
+
+<!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
 
 <div class="sidebar">
@@ -74,18 +114,23 @@ include("db.php");
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+     <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
 	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
+			 <li>
 	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
@@ -100,7 +145,7 @@ include("db.php");
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Delete Kid Profile
+			Kid Registration
 		</h2>
 		
 		<div class="user-wrapper">
@@ -117,7 +162,7 @@ include("db.php");
 
 <main>
 <?php if (isset($_SESSION['message'])): ?>
-	<div class="<?php if(str_contains($_SESSION['message'], "Delete Failed")) { echo 'msg-danger';} else {echo 'msg';} ?>">
+	<div class="msg">
 		<?php 
 			echo $_SESSION['message']; 
 			unset($_SESSION['message']);
@@ -125,45 +170,66 @@ include("db.php");
 	</div>
 <?php endif ?>
 
-<div style="margin-left:10%;padding:1px 16px;height:1000px;">
-<table class="center">
-	<thead>
-		<tr>
-            <th>Kid ID</th>
-			<th>Name</th>
-			<th>Gender</th>
-			<th>Date Of Birth</th>
-			<th>Race</th>
-			<th>Allergy</th>
-			<th>Action</th>
-		</tr>
-	</thead>
-</div>
-	
+        <div>
+            <form action="reg_kid_function.php" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            <th>Name:</th>
+                        </td>
+                        <td>
+						<input type="text" name="name">
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                            <th>Gender:</th>
+                        </td>
+                        <td>
+						<input type="text" name="gender">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <th>Date of Birth:</th>
+                        </td>
+                        <td>
+						<input type="date" name="dob">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <th>Race:</th>
+                        </td>
+                        <td>
+						<input type="text" name="race">
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                            <th>Allergy:</th>
+                        </td>
+                        <td>
+						<<input type="text" name="allergy">
+                        </td>
+                    </tr>
 
-	<?php 
-        $results = mysqli_query($db, "SELECT * FROM kid"); 
-        while ($row = mysqli_fetch_array($results)) { 
-    ?>
-		<tr>
-            <td>K<?php echo $row['kidId']; ?></td> 
-			<td><?php echo $row['kidName']; ?></td>
-			<td><?php echo $row['kidGender']; ?></td>
-			<td><?php echo $row['kidDob']; ?></td>
-			<td><?php echo $row['kidRace']; ?></td>
-			<td><?php echo $row['kidAllergy']; ?></td>
-				
-			<td style="display:table-cell;"><a href="delete_kid_func.php?kid=<?php echo $row['kidId']; ?>" class="del_btn">Delete</a></td>
-		</tr>
-	<?php } ?>
-</table>
-		</main>
-		<footer id="footer">
+                    <tr>
+					<div class="center">	
+					<td><button class="button" type="submit" name="save" >Save</button></td>
+					<td><button class="button" type="reset" name="clear" >Clear</button></td>
+</tr>
+                </table>
+	</form>
+</main>
+<footer id="footer">
 	<p>Copyright 2021, All Right Reserved</p>
 
 </footer>
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
+
 </body>
 </html>

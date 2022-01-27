@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include("include/db.inc.php");
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -14,27 +18,33 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
+
 </head>
-
 <style>
-
-th, td
+	table
 {
 	background-color:"white";
     padding: 20px;
-	width: 80%;
+	width: 90%;
 	border:1px solid black;
-  border-collapse:collapse;
 	text-align: left;
-  margin-align: center;
+}
+td{
+	border:1px solid black;
+	width: 15%;
+}
+th{
+	width: 10%;
+}
+.edit_btn {
+    text-decoration: none;
+    padding: 4px 6px;
+    background: #808080;
+    color: white;
+    border-radius: 3px;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
 </style>
-
 <body>
 	<!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
@@ -44,19 +54,24 @@ th, td
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
-	 			<a href="index.php"><span class="la la-user-circle"></span>
+			 <li>
+	 			<a href="../kids/index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
@@ -70,7 +85,7 @@ th, td
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			 Kid Report
+			Update Parent Profile
 		</h2>
 		
 		<div class="user-wrapper">
@@ -85,72 +100,48 @@ th, td
         </div>
 	</header>
 
+
 <main>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-        <?php 
-        include("db.php");
-
-        $sql = "SELECT
-        COUNT(CASE WHEN kidGender='Male' THEN 1 END) AS male_count,
-        COUNT(CASE WHEN kidGender='Female' THEN 1 END) AS female_count,
-        COUNT(*) AS total_count
-        FROM kid";
-        $result = mysqli_query($db, $sql);
-        $resultCount = mysqli_query($db, $sql);
-        ?>
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Gender Type', 'Gender Count'],
-          <?php while($row = mysqli_fetch_assoc($result)) {?>
-            ['Male',    <?php echo $row["male_count"]; ?>],
-            ['Female',    <?php echo $row["female_count"]; ?>],
-          <?php } ?>
-          
-        ]);
-
-        var options = {
-          title: 'Popularity of Kid Gender'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
-</head>
-
-<div id="piechart" style="margin: auto; width: 700px; height: 500px;"></div><br><br>
-
-<table class="center" width="50%">
-    <tr>
-        <th>Gender</th>
-        <td>Total</td>
-    </tr>
-    <?php if($fetch = mysqli_fetch_assoc($resultCount)) { ?>
-    <tr>
-        <th>Male</th>
-        <td><?php echo $fetch["male_count"]; ?></td>
-    </tr>
-    <tr>
-        <th>Female</th>
-        <td><?php echo $fetch["female_count"]; ?></td>
-    </tr>
-    <tr>
-        <th>Total Kids</th>
-        <td><?php echo $fetch["total_count"]; ?></td>
-    </tr>
-
-        
-    <?php } ?>
-    
-
+<div style="margin-left:10%;padding:100px 16px;height:1000px;">
+<table class="center">
+	<thead>
+		<tr>
+            <th>Parent ID</th>
+			<th>Name</th>
+			<th>Phone Number</th>
+			<th>Address</th>
+			<th>Registration Year</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	
+	<?php 
+        $results = mysqli_query($db, "SELECT * FROM parent"); 
+        while ($row = mysqli_fetch_array($results)) { 
+    ?>
+		<tr>
+            <td>P<?php echo $row['parID']; ?></td> 
+			<td><?php echo $row['parName']; ?></td>
+			<td><?php echo $row['parPhoneNum']; ?></td>
+			<td><?php echo $row['parAddress']; ?></td>
+			<td><?php echo $row['parYearReg']; ?></td>
+			<td><?php echo $row['parStatus']; ?></td>
+			
+			<td style="display:table-cell;">
+			<a href="edit.php?id=<?php echo $row['parID']; ?>" class="edit_btn">Update</a>
+			</td>
+		</tr>
+	<?php } ?>
 </table>
-    </main>
+		</div>
+		</main>
+		<footer id="footer">
+	<p>Copyright 2021, All Right Reserved</p>
+
+</footer>
+</div>
+<!-- partial -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
 </body>
 </html>

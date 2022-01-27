@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("include/db.inc.php");
+include("db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -20,32 +20,50 @@ include("include/db.inc.php");
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
 
 </head>
-
 <style>
-
-
-th, td
+	th, td
 {
 	background-color:"white";
     padding: 20px;
 	width: 10%;
 	border:1px solid black;
+  border-collapse:collapse;
 	text-align: left;
-    
 }
 
 .center {
   margin-left: auto;
   margin-right: auto;
 }
-.view_btn {
+
+.msg {
+  margin: auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    color: #3c763d; 
+    background: #dff0d8; 
+    border: 1px solid #3c763d;
+    width: 30%;
+    text-align: center;
+}
+
+.msg-danger {
+  margin: 30px auto; 
+  padding: 10px; 
+  border-radius: 5px; 
+  color: red; 
+  background: #dff0d8; 
+  border: 1px solid red;
+  width: 50%;
+  text-align: center;
+}
+.del_btn {
   text-decoration: none;
   padding: 4px 6px;
   color: white;
   border-radius: 3px;
   background: #808080;
 }
-
 </style>
 <body>
 	<!-- partial:index.partial.html -->
@@ -56,19 +74,24 @@ th, td
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="index.php"><span class="la la-user-circle"></span>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
-	 			<a href="../kid/index.php"><span class="la la-user-circle"></span>
+			 <li>
+	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
@@ -82,7 +105,7 @@ th, td
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			View Parent Profile
+			Delete Kid Profile
 		</h2>
 		
 		<div class="user-wrapper">
@@ -96,39 +119,49 @@ th, td
             </div>
         </div>
 	</header>
-<main>
-<div style="margin-left:10%;padding:50px 16px;height:1000px;">
 
+<main>
+<?php if (isset($_SESSION['message'])): ?>
+	<div class="<?php if(str_contains($_SESSION['message'], "Delete Failed")) { echo 'msg-danger';} else {echo 'msg';} ?>">
+		<?php 
+			echo $_SESSION['message']; 
+			unset($_SESSION['message']);
+		?>
+	</div>
+<?php endif ?>
+
+<div style="margin-left:10%;padding:1px 16px;height:1000px;">
 <table class="center">
 	<thead>
 		<tr>
-            <th>Parent ID</th>
+            <th>Kid ID</th>
 			<th>Name</th>
-			<th>Phone Number</th>
-			<th>Address</th>
-			<th>Registration Year</th>
-			<th>Status</th>
+			<th>Gender</th>
+			<th>Date Of Birth</th>
+			<th>Race</th>
+			<th>Allergy</th>
 			<th>Action</th>
 		</tr>
 	</thead>
+</div>
 	
+
 	<?php 
-        $results = mysqli_query($db, "SELECT * FROM parent"); 
+        $results = mysqli_query($db, "SELECT * FROM kid"); 
         while ($row = mysqli_fetch_array($results)) { 
     ?>
 		<tr>
-            <td>P<?php echo $row['parID']; ?></td> 
-			<td><?php echo $row['parName']; ?></td>
-			<td><?php echo $row['parPhoneNum']; ?></td>
-			<td><?php echo $row['parAddress']; ?></td>
-			<td><?php echo $row['parYearReg']; ?></td>
-			<td><?php echo $row['parStatus']; ?></td>			
-			<td style="display:table-cell;"><a href="par_view.php?id=<?php echo $row["parID"];?>" class="view_btn">View</a>
-			</td>
+            <td>K<?php echo $row['kidId']; ?></td> 
+			<td><?php echo $row['kidName']; ?></td>
+			<td><?php echo $row['kidGender']; ?></td>
+			<td><?php echo $row['kidDob']; ?></td>
+			<td><?php echo $row['kidRace']; ?></td>
+			<td><?php echo $row['kidAllergy']; ?></td>
+				
+			<td style="display:table-cell;"><a href="delete_kid_func.php?kid=<?php echo $row['kidId']; ?>" class="del_btn">Delete</a></td>
 		</tr>
 	<?php } ?>
 </table>
-		</div>
 		</main>
 		<footer id="footer">
 	<p>Copyright 2021, All Right Reserved</p>

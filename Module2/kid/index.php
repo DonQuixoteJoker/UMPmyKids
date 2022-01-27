@@ -1,7 +1,3 @@
-<?php 
-session_start();
-include("include/db.inc.php");
-?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -20,33 +16,9 @@ include("include/db.inc.php");
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
 
 </head>
-<style>
-	table
-{
-	background-color:"white";
-    padding: 20px;
-	width: 90%;
-	border:1px solid black;
-	text-align: left;
-}
-td{
-	border:1px solid black;
-	width: 15%;
-}
-th{
-	width: 10%;
-}
-.edit_btn {
-    text-decoration: none;
-    padding: 4px 6px;
-    background: #808080;
-    color: white;
-    border-radius: 3px;
-}
 
-</style>
 <body>
-	<!-- partial:index.partial.html -->
+<!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
 
 <div class="sidebar">
@@ -54,19 +26,24 @@ th{
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="index.php"><span class="la la-user-circle"></span>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
-	 			<a href="../kid/index.php"><span class="la la-user-circle"></span>
+			 <li>
+	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
@@ -74,13 +51,13 @@ th{
 	 </div>
  </div>
 
- <div class="main-content">
+<div class="main-content">
 	<header>
 		<h2 class="heading" id="dashboard">
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Update Parent Profile
+			Dashboard
 		</h2>
 		
 		<div class="user-wrapper">
@@ -94,49 +71,88 @@ th{
             </div>
         </div>
 	</header>
+	<main>
 
+		<div class="cards">
+            <a href="register.php" >
+            <div class="card-single">
+				<div>
+					<span>Register Kid</span>
+				</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+            </div>
+            </a>
 
-<main>
-<div style="margin-left:10%;padding:100px 16px;height:1000px;">
-<table class="center">
-	<thead>
-		<tr>
-            <th>Parent ID</th>
-			<th>Name</th>
-			<th>Phone Number</th>
-			<th>Address</th>
-			<th>Registration Year</th>
-			<th>Status</th>
-			<th>Action</th>
-		</tr>
-	</thead>
-	
-	<?php 
-        $results = mysqli_query($db, "SELECT * FROM parent"); 
-        while ($row = mysqli_fetch_array($results)) { 
-    ?>
-		<tr>
-            <td>P<?php echo $row['parID']; ?></td> 
-			<td><?php echo $row['parName']; ?></td>
-			<td><?php echo $row['parPhoneNum']; ?></td>
-			<td><?php echo $row['parAddress']; ?></td>
-			<td><?php echo $row['parYearReg']; ?></td>
-			<td><?php echo $row['parStatus']; ?></td>
-			
-			<td style="display:table-cell;">
-			<a href="edit.php?id=<?php echo $row['parID']; ?>" class="edit_btn">Update</a>
-			</td>
-		</tr>
-	<?php } ?>
-</table>
+			<a href="kid_list_upd.php" >
+                <div class="card-single">
+				<div>
+					<span>Update Kid Profile</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="kid_list_del.php" >
+			<div class="card-single">
+				<div>
+					<span>Delete Kid Profile</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="kid_list_view.php" >
+			<div class="card-single">
+				<div>
+					<span>View Kid Profile</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="kid_report.php" >
+			<div class="card-single">
+				<div>
+					<span>View Kid Report</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
 		</div>
-		</main>
-		<footer id="footer">
+
+	
+	</main>
+    
+	<footer id="footer">
 	<p>Copyright 2021, All Right Reserved</p>
 
 </footer>
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
+
 </body>
 </html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

@@ -57,16 +57,21 @@ th, td
 	 <div class="sidebar-menu">
 	 	<ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
 	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
+			 <li>
 	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>

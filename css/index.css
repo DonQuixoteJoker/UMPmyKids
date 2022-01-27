@@ -778,7 +778,6 @@ body.light .heading{
 .recent-grid
 {
 	margin-top:1.0rem;
-	display:grid;
 	grid-gap:2rem;
 	grid-template-columns:50% auto;
 }

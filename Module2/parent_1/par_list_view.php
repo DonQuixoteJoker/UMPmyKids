@@ -20,30 +20,31 @@ include("include/db.inc.php");
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
 
 </head>
+
 <style>
-	table
+
+
+th, td
 {
 	background-color:"white";
     padding: 20px;
-	width: 90%;
+	width: 10%;
 	border:1px solid black;
 	text-align: left;
-}
-td{
-	border:1px solid black;
-	width: 15%;
-}
-th{
-	width: 10%;
-}
-.del_btn {
-    text-decoration: none;
-    padding: 4px 6px;
-    color: white;
-    border-radius: 3px;
-    background: #808080;
+    
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.view_btn {
+  text-decoration: none;
+  padding: 4px 6px;
+  color: white;
+  border-radius: 3px;
+  background: #808080;
+}
 
 </style>
 <body>
@@ -55,19 +56,24 @@ th{
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
 	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
-	 			<a href="../kid/index.php"><span class="la la-user-circle"></span>
+			 <li>
+	 			<a href="../kids/index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
@@ -81,7 +87,7 @@ th{
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Delete Parent Profile
+			View Parent Profile
 		</h2>
 		
 		<div class="user-wrapper">
@@ -95,19 +101,10 @@ th{
             </div>
         </div>
 	</header>
-
 <main>
-<?php if (isset($_SESSION['message'])): ?>
-	<div class="<?php if(str_contains($_SESSION['message'], "Delete Failed")) { echo 'msg-danger';} else {echo 'msg';} ?>">
-		<?php 
-			echo $_SESSION['message']; 
-			unset($_SESSION['message']);
-		?>
-	</div>
-<?php endif ?>
+<div style="margin-left:10%;padding:50px 16px;height:1000px;">
 
-<div style="margin-left:10%;padding:100px 16px;height:1000px;">
-<table class ="center">
+<table class="center">
 	<thead>
 		<tr>
             <th>Parent ID</th>
@@ -130,17 +127,14 @@ th{
 			<td><?php echo $row['parPhoneNum']; ?></td>
 			<td><?php echo $row['parAddress']; ?></td>
 			<td><?php echo $row['parYearReg']; ?></td>
-			<td><?php echo $row['parStatus']; ?></td>
-			
-			<td style="display:table-cell;">
-				<a href="functions/deleteProfile.func.php?parent=<?php echo $row['parID']; ?>" class="del_btn">Delete</a>
+			<td><?php echo $row['parStatus']; ?></td>			
+			<td style="display:table-cell;"><a href="par_view.php?id=<?php echo $row["parID"];?>" class="view_btn">View</a>
 			</td>
 		</tr>
 	<?php } ?>
 </table>
 		</div>
 		</main>
-
 		<footer id="footer">
 	<p>Copyright 2021, All Right Reserved</p>
 

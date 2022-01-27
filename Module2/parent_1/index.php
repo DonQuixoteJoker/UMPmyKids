@@ -1,20 +1,3 @@
-<?php 
-session_start();
-include("include/db.inc.php");
-
-$parID = intval($_GET["id"]);
-$sql = "SELECT * FROM parent WHERE parID = '$parID'";
-$result = mysqli_query($db, $sql);
-$row = mysqli_fetch_assoc($result);
-
-extract($row);
-
-if(!$row) {
-    echo "<script>alert('Invalid Page'); window.history.go(-1);</script>";
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -33,65 +16,9 @@ if(!$row) {
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><link rel="stylesheet" href="../css/index.css">
 
 </head>
-<style>
-input 
-{
-	width: 100%;
-	padding: 15px 50px;
-	margin: 8px 0;
-	display: inline-block;
-	box-sizing: border-box;
-    color:black;
-    font-size: 15px;
 
-
-}
-
-.button {
-    background-color: #C3C3C3;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 2px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.container 
-{
-	padding: 20px;
-}
-
-form
-{
-    background-color: #E5E5E5;
-    text-align: center;
-    border-radius: 9px;
-    padding: 100px;
-    font-size: 20px;
-    margin-left:15%;
-    margin-right:20%;
-    align-items: center;
-}
-
-table
-{
-    padding: 20px;
-	width: 100%;
-}
-
-th
-{
-    text-align: left;
-}
-</style>
 <body>
-	<!-- partial:index.partial.html -->
+<!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
 
 <div class="sidebar">
@@ -99,18 +26,23 @@ th
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
 	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
+			 <li>
 	 			<a href="../kid/index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
@@ -119,13 +51,13 @@ th
 	 </div>
  </div>
 
- <div class="main-content">
+<div class="main-content">
 	<header>
 		<h2 class="heading" id="dashboard">
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			Parent Profile
+			Dashboard
 		</h2>
 		
 		<div class="user-wrapper">
@@ -139,70 +71,86 @@ th
             </div>
         </div>
 	</header>
+	<main>
 
-<?php if (isset($_SESSION['message'])): ?>
-	<div class="msg">
-		<?php 
-			echo $_SESSION['message']; 
-			unset($_SESSION['message']);
-		?>
-	</div>
-<?php endif ?>
+		<div class="cards">
+            <a href="par_registration.php" >
+            <div class="card-single">
+				<div>
+					<span>Register Parent</span>
+				</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+            </div>
+            </a>
 
-<main>
-<div style="margin-left:15%;padding:100px 16px;height:1000px;">
-	<form method="post" action="functions/editProfile.func.php" >
-    <h2>Parent Profile</h2>
+			<a href="par_list_upd.php" >
+                <div class="card-single">
+				<div>
+					<span>Update Parent Profile</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="par_list_del.php" >
+			<div class="card-single">
+				<div>
+					<span>Delete Parent Profile</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="par_list_view.php" >
+			<div class="card-single">
+				<div>
+					<span>View Parent Profile</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="#" >
+			<div class="card-single">
+				<div>
+					<span>View Payment</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+
+            <a href="par_report.php" >
+			<div class="card-single">
+				<div>
+					<span>View Parent Report</span>
+					</div>
+				<div>
+					<span class="las la-users"></span>
+				</div>
+			</div>
+            </a>
+		</div>
+
 	
-	<div class="input-group">
-			<label>Parent Id : <?php echo $parID; ?></label>
-		</div>
-		
-		<div class="input-group">
-			
-		<label>Name : <?php echo $parName; ?></label>
-			
-		</div>
-		
-		<div class="input-group">
-			
-		<label>Phone Number : <?php echo $parPhoneNum; ?></label>
-		
-		</div>
-
-		<div class="input-group">
-		
-		<label>Address : <?php echo $parAddress; ?></label>
-
-		</div>
-
-		<div class="input-group">
-		
-		<label>Year Registered : <?php echo $parYearReg; ?></label>
-		
-		</div>
-
-		<div class="input-group">
-		
-		<label>Status : <?php echo $parStatus; ?></label>
-		
-		</div>
-		
-		<div class="input-group">
-            <input type="hidden" value="<?php echo $row["parID"]; ?>" name="parent_id">
-		</div>
-</div>
-</div>
-	</form>
-</main>
-<footer id="footer">
+	</main>
+    
+	<footer id="footer">
 	<p>Copyright 2021, All Right Reserved</p>
 
 </footer>
 </div>
 <!-- partial -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="js/index.js"></script>
-
 
 </body>
 </html>

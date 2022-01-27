@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("db.php");
+include("include/db.inc.php");
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -36,16 +36,18 @@ td{
 th{
 	width: 10%;
 }
-.view_btn {
-  text-decoration: none;
-  padding: 4px 6px;
-  color: white;
-  border-radius: 3px;
-  background: #808080;
+.del_btn {
+    text-decoration: none;
+    padding: 4px 6px;
+    color: white;
+    border-radius: 3px;
+    background: #808080;
 }
-	</style>
+
+
+</style>
 <body>
-<!-- partial:index.partial.html -->
+	<!-- partial:index.partial.html -->
 <input type="checkbox" id="nav-toggle"> 
 
 <div class="sidebar">
@@ -53,19 +55,24 @@ th{
  		 	<h2><img src="../img/ump.png" alt="" height="40" width="25">&nbsp;<span id="kleenpulse" style="vertical-align: baseline;">UMP myKids</span></h2>
  	</div>
 	 <div class="sidebar-menu">
-	 	<ul>
+	 <ul>
 	 		<li>
-	 			<a href="adminDashboard.php" class="active"><span class="las la-igloo"></span>
+	 			<a href="../../project_module1/adminDashboard.php" class="active"><span class="las la-igloo"></span>
 	 				<span>Dashboard</span>
 	 			</a>
 	 		</li>
 			<li>
-	 			<a href="../parent_1/index.php"><span class="la la-user-circle"></span>
+	 			<a href="../../Module3/manpower.php"><span class="la la-user-circle"></span>
+	 				<span>Manpower</span>
+	 			</a>
+	 		</li>
+			 <li>
+	 			<a href="index.php"><span class="la la-user-circle"></span>
 	 				<span>Parent</span>
 	 			</a>
 	 		</li>
-             <li>
-	 			<a href="index.php"><span class="la la-user-circle"></span>
+			 <li>
+	 			<a href="../kids/index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
@@ -79,7 +86,7 @@ th{
 			<label for="nav-toggle">
 				<span class="las la-bars"></span>
 			</label>
-			View Kid Profile
+			Delete Parent Profile
 		</h2>
 		
 		<div class="user-wrapper">
@@ -94,43 +101,51 @@ th{
         </div>
 	</header>
 
-	<main>
-<div style="margin-left:10%;padding:1px 16px;height:1000px;">
+<main>
+<?php if (isset($_SESSION['message'])): ?>
+	<div class="<?php if(str_contains($_SESSION['message'], "Delete Failed")) { echo 'msg-danger';} else {echo 'msg';} ?>">
+		<?php 
+			echo $_SESSION['message']; 
+			unset($_SESSION['message']);
+		?>
+	</div>
+<?php endif ?>
 
-<table>
+<div style="margin-left:10%;padding:100px 16px;height:1000px;">
+<table class ="center">
 	<thead>
 		<tr>
-            <th>Kid ID</th>
+            <th>Parent ID</th>
 			<th>Name</th>
-			<th>Gender</th>
-			<th>Date Of Birth</th>
-			<th>Race</th>
-			<th>Allergy</th>
-			<th colspan="2">Action</th>
+			<th>Phone Number</th>
+			<th>Address</th>
+			<th>Registration Year</th>
+			<th>Status</th>
+			<th>Action</th>
 		</tr>
 	</thead>
-</div>
 	
-
 	<?php 
-        $results = mysqli_query($db, "SELECT * FROM kid"); 
+        $results = mysqli_query($db, "SELECT * FROM parent"); 
         while ($row = mysqli_fetch_array($results)) { 
     ?>
 		<tr>
-            <td>K<?php echo $row['kidId']; ?></td> 
-			<td><?php echo $row['kidName']; ?></td>
-			<td><?php echo $row['kidGender']; ?></td>
-			<td><?php echo $row['kidDob']; ?></td>
-			<td><?php echo $row['kidRace']; ?></td>
-			<td><?php echo $row['kidAllergy']; ?></td>
-				
-			<td align="center" style="display:table-cell;">
-				<a href="kid_view.php?id=<?php echo $row["kidId"]; ?>" class="view_btn">View</a>
+            <td>P<?php echo $row['parID']; ?></td> 
+			<td><?php echo $row['parName']; ?></td>
+			<td><?php echo $row['parPhoneNum']; ?></td>
+			<td><?php echo $row['parAddress']; ?></td>
+			<td><?php echo $row['parYearReg']; ?></td>
+			<td><?php echo $row['parStatus']; ?></td>
+			
+			<td style="display:table-cell;">
+				<a href="functions/deleteProfile.func.php?parent=<?php echo $row['parID']; ?>" class="del_btn">Delete</a>
 			</td>
 		</tr>
 	<?php } ?>
 </table>
+		</div>
 		</main>
+
 		<footer id="footer">
 	<p>Copyright 2021, All Right Reserved</p>
 
