@@ -1,7 +1,3 @@
-<?php
-
-
-header("Location: ownerDashboard.php");
-
-
-?>
+<h1>
+    dfsdffff
+</h1>
