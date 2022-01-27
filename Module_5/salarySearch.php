@@ -228,7 +228,13 @@ a:hover{
                                                     <td><?php echo $data['totalSalary'] ?></td>
                                                     <td><?php echo $data['paidDate'] ?></td>
                                                     <td><?php echo $data['salaryStatus'] ?></td>
-                                                    <td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>
+                                                    <!--<td><button name="reminder" value="REMINDER" class="remindbutton">Remind</button></td>-->
+                                                    <?php if($data['salaryStatus']=="Paid"){ ?> 
+                                                        <td>PAID</td>
+                                                    <?php } else { ?>
+                                                        
+                                                        <td><button type="button" onclick='window.location.replace("../project_module1/adminDashboard.php")' id="myButton" class="remindbutton">Remind</button></td>
+                                                    <?php } ?>
                                                 </tr>
                                                 <?php
                                               }} else { echo "No results found"; }
