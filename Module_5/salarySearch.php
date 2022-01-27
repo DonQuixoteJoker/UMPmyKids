@@ -152,7 +152,7 @@ a:hover{
                 </div>
             </div>
             <div>
-                <a style="color: black;" href="function.php?logout='1'"><b>Log Out</b></a>
+                <a style="color: black;" href="../project_module1/function.php?logout='1'"><b>Log Out</b></a>
             </div>
         </div>
 	</header>
