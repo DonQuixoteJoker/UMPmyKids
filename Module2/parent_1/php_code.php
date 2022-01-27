@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	$db = mysqli_connect('localhost', 'root', '', 'umpmykids');
+	include("../include/db.inc.php");
 
 	// initialize variables
 	$parName = "";
