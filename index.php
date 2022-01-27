@@ -1,5 +1,5 @@
 <?php
 
-header("Location: owner_dashboard.php");
+header("Location :https://www.google.com/");
 
 ?>
