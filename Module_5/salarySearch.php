@@ -165,9 +165,6 @@ a:hover{
                     
                     
                     <tr style="background-color: #D3D3D3">
-                        <!--<td>
-                            <th style="text-align: left;">Enter MP ID:</th>
-                        </td>-->
                         <td colspan="2">
                             <input type="text" placeholder="Search Worker ID" name="searchID" id="searchID">
                         </td>
@@ -197,7 +194,6 @@ a:hover{
                                 <col style="width: 20%;" />
                                 <col style="width: 20%;" />
                                 <col style="width: 10%;" />
-                                <!--<col style="width: 10%;" />-->
                                     <thead>
                                         <tr>
                                             <td>Manpower ID</td>
@@ -205,7 +201,6 @@ a:hover{
                                             <td>Date</td>
                                             <td>Status</td>
                                             <td>Reminder</td>
-                                            <!--<td style="text-align:center;">Action</td>-->
                                         </tr>
                                     </thead>
                                     
@@ -223,11 +218,10 @@ a:hover{
                                             if (count($results) > 0) { foreach ($results as $data) {                                                
                                                 ?>
                                                 <tr>
-                                                    <!--<td><a href="salaryDetail.php"><?php //echo $data['mpID'] ?></td>-->
                                                     <?php echo '<td><a href=\'salaryDetail.php?mpID='.$data['mpID'].'\'>'.$data['mpID']. '</td>'; ?>
                                                     <td><?php echo $data['totalSalary'] ?></td>
                                                     <td><?php echo $data['paidDate'] ?></td>
-                                                    <td><?php echo $data['salaryStatus'] ?></td>                                                    
+                                                    <td><?php echo $data['salaryStatus'] ?></td>
                                                     <?php if($data['salaryStatus']=="Paid"){ ?> 
                                                         <td>PAID</td>
                                                     <?php } else { ?>
@@ -239,23 +233,6 @@ a:hover{
                                               }} else { echo "No results found"; }
                                               
                                         }
-
-                                        /*if (isset($_POST["searchID"]))
-                                        {
-                                            $id = $_POST['searchID'];
-                                            $query = "SELECT * FROM salary WHERE mpID = '$id'";
-                                            $result = mysqli_query($db, $query) or die ("Could not execute query");
-
-                                            if (mysqli_num_rows($result) == 1)
-                                            {
-                                                $row = mysqli_fetch_assoc($result);
-                                                ?>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <?php
-                                            }
-                                        }*/
                                         
                                         
                                     ?>                                    
