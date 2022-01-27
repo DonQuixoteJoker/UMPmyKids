@@ -20,8 +20,8 @@ $d_data=mysqli_fetch_assoc($d);
 //Select all data from payment table
 $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID");
 
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +38,7 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">
 
 </head>
 
@@ -67,6 +68,7 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                         <span>Salary</span>
                     </a>
                 </li>
+                
             </ul>
         </div>
     </div>
@@ -91,7 +93,8 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
         <main>
 
             <div class="cards">
-                <div class="card-single">
+
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             RM <?php echo $a_data['profit']; ?>
@@ -102,7 +105,8 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                         <span class="las la-wallet"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                </a>
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             <?php echo $b_data['kids_registered']; ?>
@@ -112,8 +116,8 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                     <div>
                         <span class="las la-hand-holding-usd"></span>
                     </div>
-                </div>
-                <div class="card-single">
+                </div></a>
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             RM <?php echo $c_data['total_paid']; ?>
@@ -123,8 +127,8 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                     <div>
                         <span class="las la-chalkboard-teacher"></span>
                     </div>
-                </div>
-                <div class="card-single">
+                </div></a>
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             RM <?php echo $d_data['total_overdue']; ?>
@@ -134,7 +138,7 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                     <div>
                         <span class="las la-users"></span>
                     </div>
-                </div>
+                </div></a>
             </div>
 
             <div class="recent-grid">
@@ -176,15 +180,17 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                                             <td><?php echo $row["paymentDate"]; ?></td>
                                             <td>
                                                 <button class="myButton viewDetail">View</button>
-                                                <button class="myButton">Remind</button>
+                                                <button class="myButton reminder">Remind</button>
                                             </td>
                             
                             </td>
                             </tr>
+                            
                             </tbody>
                                 <?php
                                         }
                                     ?>
+                                    
                                 </table>
                                 </div>
 
@@ -192,6 +198,14 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                     </div>
                 </div>
             </div>
+
+            <br>
+                   
+            <li class="dropdown">
+       <a href="#" data-toggle="dropdown"><span class="fa fa-bell" style="font-size:18px; width: 100px;height: 100px"></span></a>
+       <ul class="dropdown-menu"></ul>
+      </li>  
+
 
  <!-- VIEW MODAL -->
  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -238,12 +252,45 @@ $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN
                             <label><strong>Status</strong></label>
                             <input type="text" name="status" id="status" class="form-control" disabled>
                         </div>
+
+                        
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                    
                     </div>
 
                     </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- REMINDER MODAL -->
+ <div class="modal fade" id="remindModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="padding:10px">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form method="post" id="comment_form">
+    <div class="form-group">
+     <label>Enter Subject</label>
+     <input type="text" name="subject" id="subject" class="form-control">
+    </div>
+    <div class="form-group">
+     <label>Enter Reminder</label>
+     <textarea name="comment" id="comment" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+     <input type="submit" name="post" id="post" class="btn btn-info" value="Post" />
+    </div>
+   </form>
 
             </div>
         </div>
@@ -285,7 +332,65 @@ $('.viewDetail').on('click', function () {
     $('#yearReg').val(data[4]);
     $('#status').val(data[5]);
 });
+
+$('.reminder').on('click', function () {
+
+$('#remindModal').modal('show');
+
 });
+
+function load_unseen_notification(view = '')
+ {
+  $.ajax({
+   url:"../config/fetchNotification.php",
+   method:"POST",
+   data:{view:view},
+   dataType:"json",
+   success:function(data)
+   {
+    $('.dropdown-menu').html(data.notification);
+    if(data.unseen_notification > 0)
+    {
+     $('.count').html(data.unseen_notification);
+    }
+   }
+  });
+ }
+ 
+ load_unseen_notification();
+ 
+ $('#comment_form').on('submit', function(event){
+  event.preventDefault();
+  if($('#subject').val() != '' && $('#comment').val() != '')
+  {
+   var form_data = $(this).serialize();
+   $.ajax({
+    url:"../config/insertNotification.php",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+     $('#comment_form')[0].reset();
+     load_unseen_notification();
+    }
+   });
+  }
+  else
+  {
+   alert("Both Fields are Required");
+  }
+ });
+ 
+ $(document).on('click', '.dropdown-toggle', function(){
+  $('.count').html('');
+  load_unseen_notification('yes');
+ });
+ 
+ setInterval(function(){ 
+  load_unseen_notification();; 
+ }, 5000);
+});
+
     </script>
 
 </body>
