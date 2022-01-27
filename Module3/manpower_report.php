@@ -64,7 +64,7 @@
 	</header>
 	<main>
                         <div  style="width:100%; ">
-                            <table class="card center" style="width:600px;height:300px;background:rgba(255,255,255,.4);">
+                            <table class="card center" style="background:rgba(255,255,255,.4);padding: 10px;">
                                 <tr>
                                     <td colspan="2"><h1 style="text-align:center;">Manpower by Status</h1></td>
                                     <td></td>
@@ -139,12 +139,12 @@
 
 
 
+<br>
 
 
 
 
-
-                            <table class="card center" style="width:600px;height:300px;background:rgba(255,255,255,.4);">
+                            <table class="card center" style="background:rgba(255,255,255,.4);padding: 10px;">
                                 
                                 <tr>
                                     <td colspan="2"><h1 style="text-align:center;">Active Manpower</h1></td>
@@ -221,10 +221,10 @@
 
 
 
+<br>
 
 
-
-                        <table class="card center" style="width:600px;height:300px;background:rgba(255,255,255,.4);">
+                        <table class="card center" style="background:rgba(255,255,255,.4); padding:10px">
                                 
                                 <tr>
                                     <td colspan="2"><h1 style="text-align:center;">Terminated Manpower</h1></td>
