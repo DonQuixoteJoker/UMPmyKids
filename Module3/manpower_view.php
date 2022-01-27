@@ -68,7 +68,7 @@
 			<div class="projects">
 				<div class="card">
 					<div class="card-body">
-						<div class="table-responsive">
+						<div style="display:grid;" class="table-responsive">
                         <table>
                                     <thead>
                                         <tr>
