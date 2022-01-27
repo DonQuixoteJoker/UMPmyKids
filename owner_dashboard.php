@@ -18,7 +18,7 @@ $d=mysqli_query($conn,"SELECT COUNT(*) as total_kids from kid");
 $d_data=mysqli_fetch_assoc($d);
 
 //Select all data from payment table
-$payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID WHERE paymentStatus = 'Pending'");
+$payment=mysqli_query($conn,"SELECT *,parent.parName from payment INNER JOIN parent ON payment.parID=parent.parID WHERE paymentStatus = 'Pending'");
 
 
 //Select all data from salary table
