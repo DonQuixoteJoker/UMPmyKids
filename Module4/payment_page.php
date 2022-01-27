@@ -21,15 +21,7 @@ $d_data=mysqli_fetch_assoc($d);
 $payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID");
 
 
-//status chart
-$received=mysqli_query($conn,"SELECT SUM(paymentAmount) as received from payment WHERE paymentStatus='Received'");
-$amountChart=mysqli_fetch_assoc($chart);
-
-//amount chart
-$chart2=mysqli_query($conn,"SELECT * from payment as statusChart GROUP BY paymentStatus");
-$statusChart=mysqli_fetch_assoc($chart2);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,6 +68,7 @@ $statusChart=mysqli_fetch_assoc($chart2);
                         <span>Salary</span>
                     </a>
                 </li>
+                
             </ul>
         </div>
     </div>
@@ -100,7 +93,8 @@ $statusChart=mysqli_fetch_assoc($chart2);
         <main>
 
             <div class="cards">
-                <div class="card-single">
+
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             RM <?php echo $a_data['profit']; ?>
@@ -111,7 +105,8 @@ $statusChart=mysqli_fetch_assoc($chart2);
                         <span class="las la-wallet"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                </a>
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             <?php echo $b_data['kids_registered']; ?>
@@ -121,8 +116,8 @@ $statusChart=mysqli_fetch_assoc($chart2);
                     <div>
                         <span class="las la-hand-holding-usd"></span>
                     </div>
-                </div>
-                <div class="card-single">
+                </div></a>
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             RM <?php echo $c_data['total_paid']; ?>
@@ -132,8 +127,8 @@ $statusChart=mysqli_fetch_assoc($chart2);
                     <div>
                         <span class="las la-chalkboard-teacher"></span>
                     </div>
-                </div>
-                <div class="card-single">
+                </div></a>
+                <a href="paymentReport.php" style="text-decoration:none;color:black"><div class="card-single">
                     <div>
                         <h1 class="dataNo">
                             RM <?php echo $d_data['total_overdue']; ?>
@@ -143,7 +138,7 @@ $statusChart=mysqli_fetch_assoc($chart2);
                     <div>
                         <span class="las la-users"></span>
                     </div>
-                </div>
+                </div></a>
             </div>
 
             <div class="recent-grid">
@@ -190,10 +185,12 @@ $statusChart=mysqli_fetch_assoc($chart2);
                             
                             </td>
                             </tr>
+                            
                             </tbody>
                                 <?php
                                         }
                                     ?>
+                                    
                                 </table>
                                 </div>
 
@@ -202,7 +199,13 @@ $statusChart=mysqli_fetch_assoc($chart2);
                 </div>
             </div>
 
-            <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+            <br>
+                   
+            <li class="dropdown">
+       <a href="#" data-toggle="dropdown"><span class="fa fa-bell" style="font-size:18px; width: 100px;height: 100px"></span></a>
+       <ul class="dropdown-menu"></ul>
+      </li>  
+
 
  <!-- VIEW MODAL -->
  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -249,7 +252,10 @@ $statusChart=mysqli_fetch_assoc($chart2);
                             <label><strong>Status</strong></label>
                             <input type="text" name="status" id="status" class="form-control" disabled>
                         </div>
+
+                        
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                    
                     </div>
@@ -386,35 +392,6 @@ function load_unseen_notification(view = '')
 });
 
     </script>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var amount = <?php echo $amountChart['amountChart']; ?>;
-
-
-        var data = google.visualization.arrayToDataTable([
-          ['Status', 'Amount'],
-          ['Teacher', amount],
-
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Payment Status',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
-    
 
 </body>
 
