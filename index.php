@@ -1,3 +1,5 @@
-<h1>
-    dfsdffff
-</h1>
+<?php
+
+header("Location: owner_dashboard.php");
+
+?>
