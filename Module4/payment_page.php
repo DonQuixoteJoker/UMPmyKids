@@ -200,11 +200,6 @@ $payment=mysqli_query($conn,"SELECT *,parent.parName from payment INNER JOIN par
             </div>
 
             <br>
-                   
-            <li class="dropdown">
-       <a href="#" data-toggle="dropdown"><span class="fa fa-bell" style="font-size:18px; width: 100px;height: 100px"></span></a>
-       <ul class="dropdown-menu"></ul>
-      </li>  
 
 
  <!-- VIEW MODAL -->
