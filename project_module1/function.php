@@ -4,7 +4,7 @@ session_start();
 
 	$errors = array();
 	
-	require_once("Connection.php");
+	require_once("connection.php");
 
 	$userID = null;
 	$userName = null;
