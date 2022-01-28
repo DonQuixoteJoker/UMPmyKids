@@ -116,7 +116,7 @@ th
 	 			</a>
 	 		</li>
 			 <li>
-	 			<a href="../kids/index.php"><span class="la la-user-circle"></span>
+	 			<a href="../kid/index.php"><span class="la la-user-circle"></span>
 	 				<span>Kid</span>
 	 			</a>
 	 		</li>
