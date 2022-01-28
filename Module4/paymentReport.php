@@ -18,7 +18,7 @@ $d=mysqli_query($conn,"SELECT SUM(paymentAmount) as total_overdue from payment W
 $d_data=mysqli_fetch_assoc($d);
 
 //Select all data from payment table
-$payment=mysqli_query($conn,"SELECT *,parent_kid.parName from payment INNER JOIN parent_kid ON payment.parID=parent_kid.parID");
+$payment=mysqli_query($conn,"SELECT *,parent.parName from payment INNER JOIN parent ON payment.parID=parent.parID");
 
 
 //RECEIVED
