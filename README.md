@@ -73,15 +73,15 @@ Developed using
 
 ## Data
 **Admin**
- - Username : Aiman
+ - Username : U002
  - Password : aiman123
 
 **Owner**
- - Username : Yong
+ - Username : U004
  - Password : yong123
 
 **UMP Staff**
- - Username : Nicole
+ - Username : U009
  - Password :nicole123
 
 ## Interface
